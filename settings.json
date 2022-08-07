@@ -1,0 +1,39 @@
+{
+    "video": {
+        "FPS": 75,
+        "OBSTACLE_DEFAULT_VEL": -20
+    },
+    "graphic": {
+        "GAME_NAME": "Solipsist",
+        "FONT": "Quinquefive-0Wonv.ttf",
+        "FONT_COLOR": [
+            255,
+            255,
+            255
+        ],
+        "PLAYER_COLOR": [
+            255,
+            255,
+            255
+        ],
+        "BACKGROUND": [
+            0,
+            0,
+            0
+        ],
+        "OBSTACLE_COLOR": [
+            255,
+            255,
+            255
+        ]
+    },
+    "music": {
+        "VOLUME": 1,
+        "DEFAULT_MUSIC_FOLDER": "sounds/music/",
+        "DEFAULT_SOUND_FOLDER": "sounds/sounds/"
+    },
+    "stats": {
+        "CLICKS": 0,
+        "TIME_PLAYED": 0
+    }
+}

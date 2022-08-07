@@ -2,18 +2,32 @@ import pygame
 import random
 import sys
 from random import randint
+from time import time
 
-from GSS import GameSettings, GameStatus, SCREEN
+
+from GSS import GameStatus
+from GSS import save_json
+from GSS import GAME_NAME
+from GSS import SCREEN
+from GSS import WINDOW_HEIGHT
+from GSS import WINDOW_WIDTH
+from GSS import OBSTACLE_COLOR
+from GSS import PLAYER_COLOR
+from GSS import OBSTACLE_DEFAULT_VEL
+from GSS import BACKGROUND
+from GSS import DEFAULT_SOUND_FOLDER
+from GSS import FPS
+from GSS import j
+
 from music import Music
 
 MUSIC =  Music()
 
 
-class Solipsist(GameSettings):
+class Solipsist():
 	'''The main character's class.'''
 	
 	def __init__(self, screen, left, top, size: int, grav: int, color=None) -> None:
-		super().__init__()
 		player = pygame.Rect(left, top, size, size)
 		self.functional_grav = 0
 		self.screen = screen
@@ -22,7 +36,7 @@ class Solipsist(GameSettings):
 		self.grav = grav
 		self.SCREEN_HEIGHT = screen.get_height()
 		if not color:
-			self.color = self.PLAYER_COLOR
+			self.color = PLAYER_COLOR
 
 	def get_rect(self):
 		return self.player
@@ -35,13 +49,13 @@ class Solipsist(GameSettings):
 		self.functional_grav += self.grav
 
 	def jump(self):
+		
 		self.functional_grav = -self.grav*24
 
 
-class Obstacle(GameSettings):
+class Obstacle():
 	'''Class for obstacles.'''
 	def __init__(self, screen, left, top, width, height, speed: int, color=None) -> None:
-		super().OBSTACLE_COLOR
 		obstacle = pygame.Rect(left, top, width, height)
 		self.functional_grav = 0
 		self.screen = screen
@@ -49,7 +63,7 @@ class Obstacle(GameSettings):
 		self.speed = speed
 		self.SCREEN_HEIGHT = screen.get_height()
 		if not color:
-			self.color = self.OBSTACLE_COLOR
+			self.color = OBSTACLE_COLOR
 
 	def get_rect(self):
 		return self.obstacle
@@ -59,45 +73,44 @@ class Obstacle(GameSettings):
 
 	def move(self, num: int = None):
 		if num == None:
-			num = self.OBSTACLE_DEFAULT_VEL
+			num = OBSTACLE_DEFAULT_VEL
 		self.obstacle.x += num
 
-	@classmethod
-	def generate_random_obstacle(cls):
+	@staticmethod
+	def generate_random_obstacle():
 		'''Generates obstacles going from the right of the screen'''
-		obstacle_class = Obstacle(cls.screen,
-		randint(cls.WINDOW_WIDTH, cls.WINDOW_WIDTH+cls.WINDOW_WIDTH/10),
-		cls.WINDOW_HEIGHT/random.randint(2, 10),
-		cls.WINDOW_WIDTH/random.randint(20, 30),
-		cls.WINDOW_HEIGHT/random.randint(2, 10),
-		cls.OBSTACLE_DEFAULT_VEL)
+		obstacle_class = Obstacle(SCREEN,
+		randint(WINDOW_WIDTH, WINDOW_WIDTH+WINDOW_WIDTH/10),
+		WINDOW_HEIGHT/random.randint(2, 10),
+		WINDOW_WIDTH/random.randint(20, 30),
+		WINDOW_HEIGHT/random.randint(2, 10),
+		OBSTACLE_DEFAULT_VEL)
 		return obstacle_class
 
 
 def main():
 	pygame.init()
-	
-	GameSettings.screen = SCREEN
-	pygame.display.set_caption(GameSettings.GAME_NAME)
-	GameSettings.WINDOW_HEIGHT = SCREEN.get_height()
-	GameSettings.WINDOW_WIDTH = SCREEN.get_width()
+	pygame.display.set_caption(GAME_NAME)
+
 
 
 
 	clock = pygame.time.Clock()
 	game_status = GameStatus(is_game_started=False, gameover=False)
 
-	solipsist = Solipsist(SCREEN, int(GameSettings.WINDOW_WIDTH/3), int(GameSettings.WINDOW_HEIGHT/4), int(GameSettings.WINDOW_HEIGHT/15), 0.5)
+	solipsist = Solipsist(SCREEN, int(WINDOW_WIDTH/3), int(WINDOW_HEIGHT/4), int(WINDOW_HEIGHT/15), 0.5)
 	player = solipsist.get_rect()
 
 	obstacle_class = Obstacle.generate_random_obstacle()
 	obstacle = obstacle_class.get_rect()
 
 
+	current_time = time()
+	previousPointAwardedTime = current_time
 	run = True
 	while run:
-		SCREEN.fill(GameSettings.BACKGROUND)
-
+		SCREEN.fill(BACKGROUND)
+		MUSIC.play_random_music()
 
 		for event in pygame.event.get():
 
@@ -107,17 +120,12 @@ def main():
 				sys.exit()
 
 			if event.type == pygame.MOUSEBUTTONDOWN and game_status.gameover is False:
-				MUSIC.play_random_music()
+				j["stats"]["CLICKS"] += 1
 				solipsist.jump()
-				game_status.is_game_started = True
 
 
-			if event.type == pygame.MOUSEBUTTONDOWN and game_status.gameover is True:
-				run = False
-				main()
 
-
-		if player[1] < GameSettings.WINDOW_HEIGHT - player.height and game_status.is_game_started is True and game_status.gameover is False:
+		if player[1] < WINDOW_HEIGHT - player.height and game_status.gameover is False:
 			solipsist.fall()
 			obstacle_class.move()
 			if obstacle.x < 0 - obstacle.width: # If it left the screen
@@ -126,14 +134,12 @@ def main():
 				obstacle = obstacle_class.get_rect()
 	
 		# If player reached top, or bottom of window
-		if player[1] >= GameSettings.WINDOW_HEIGHT-player.height or player[1] < 0 or player.colliderect(obstacle) and game_status.gameover is False:
+		if player[1] >= WINDOW_HEIGHT-player.height or player[1] < 0 or player.colliderect(obstacle):
 			MUSIC.stop()
-			if game_status.gameover is False:
-				x = pygame.mixer.Sound(GameSettings.DEFAULT_SOUND_FOLDER + "woosh.mp3")
-				x.play()
+			MUSIC.sound_woosh()
 			game_status.gameover = True
 			game_status.is_game_started = False
-			from gameover import gameover
+			from gameover import gameover # Left it here, to avoid circular import
 			gameover()
 
 
@@ -141,7 +147,15 @@ def main():
 		obstacle_class.draw_it()
 		MUSIC.make_description()
 		pygame.display.flip()
-		clock.tick(GameSettings.FPS)
+
+		# Adds 1 second to time_played stats
+		current_time = time()
+		if (current_time - previousPointAwardedTime) >= 1:
+			j["stats"]["TIME_PLAYED"] += 1
+			previousPointAwardedTime = current_time
+		save_json()
+		clock.tick(FPS)
+		
 
 if __name__ == "__main__":
 	main()

@@ -1,14 +1,14 @@
 import sys
 import pygame
 
-from GSS import GameSettings, SCREEN
+from GSS import SCREEN, FONT, BACKGROUND, FONT_COLOR, WINDOW_HEIGHT, WINDOW_WIDTH
 from main import main, MUSIC
 
 def gameover():
-	message = pygame.font.Font(GameSettings.FONT, int(GameSettings.WINDOW_WIDTH/20))
+	message = pygame.font.Font(FONT, int(WINDOW_WIDTH/20))
 	run = True
 	while run:
-		SCREEN.fill(GameSettings.BACKGROUND)
+		SCREEN.fill(BACKGROUND)
 		MUSIC.stop()
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -20,8 +20,8 @@ def gameover():
 				run = False
 				
 
-		text = message.render("Gameover", True, GameSettings.FONT_COLOR)
-		SCREEN.blit(text, (int(GameSettings.WINDOW_WIDTH/4), int(GameSettings.WINDOW_HEIGHT/3)))
+		text = message.render("Gameover", True, FONT_COLOR)
+		SCREEN.blit(text, (int(WINDOW_WIDTH/4), int(WINDOW_HEIGHT/3)))
 
 		pygame.display.flip()
 

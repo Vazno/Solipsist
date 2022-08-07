@@ -3,26 +3,34 @@ import os
 from random import choice
 
 from utils import resource_path
-from GSS import GameSettings, GameStatus
+from GSS import GameStatus
+from GSS import SCREEN
+from GSS import FONT
+from GSS import FONT_COLOR
+from GSS import WINDOW_HEIGHT
+from GSS import WINDOW_WIDTH
+from GSS import DEFAULT_MUSIC_FOLDER
+from GSS import DEFAULT_SOUND_FOLDER
 
-class Music(GameStatus, GameSettings):
+
+
+class Music(GameStatus):
 	def __init__(self, music_folder: str = None) -> None:
 		if music_folder != None:
-			self.DEFAULT_MUSIC_FOLDER = self.music_folder
-		super().__init__()
+			DEFAULT_MUSIC_FOLDER = self.music_folder
 
 	@classmethod
 	def make_description(cls):
-		_font = pygame.font.Font(cls.FONT, int(cls.WINDOW_WIDTH/100))
-		music_text = _font.render(f"Currently playing: {cls.current_music_name.split('.')[0].replace(cls.DEFAULT_MUSIC_FOLDER, '')}",True, GameSettings.FONT_COLOR)
-		cls.screen.blit(music_text, (int(cls.WINDOW_WIDTH/8), int(cls.WINDOW_HEIGHT/40)))
+		_font = pygame.font.Font(FONT, int(WINDOW_WIDTH/100))
+		music_text = _font.render(f"Currently playing: {cls.current_music_name.split('.')[0].replace(DEFAULT_MUSIC_FOLDER, '')}",True, FONT_COLOR)
+		SCREEN.blit(music_text, (int(WINDOW_WIDTH/8), int(WINDOW_HEIGHT/40)))
 
 	@classmethod
 	def pick_random_music(cls):
 		all_music = []
-		for music in os.listdir(cls.DEFAULT_MUSIC_FOLDER):
+		for music in os.listdir(DEFAULT_MUSIC_FOLDER):
 			all_music.append(music)
-		random_music = f"{cls.DEFAULT_MUSIC_FOLDER}{choice(all_music)}"
+		random_music = f"{DEFAULT_MUSIC_FOLDER}{choice(all_music)}"
 		return random_music
 
 	@staticmethod
@@ -40,3 +48,8 @@ class Music(GameStatus, GameSettings):
 			pygame.mixer.stop()
 			GameStatus.is_music_playing = False
 			GameStatus.current_music_name = ""
+
+	@staticmethod
+	def sound_woosh():
+		sound = pygame.mixer.Sound(resource_path(os.path.join(DEFAULT_SOUND_FOLDER, "woosh.mp3")))
+		sound.play()
