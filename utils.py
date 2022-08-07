@@ -1,21 +1,34 @@
 '''Unrelated to game functions and stuff'''
 
-
 import os
 import sys
 import threading
+from sys import platform as _sys_platform
+
+
+def platform():
+	if "ANDROID_ARGUMENT" in os.environ:
+		return "android"
+	elif _sys_platform in ("linux", "linux2", "linux3"):
+		return "linux"
+	elif _sys_platform in ("win32", "cygwin", "msys"):
+		return "win"
+	elif _sys_platform == "darwin":
+		return "mac"
 
 def resource_path(relative_path):
-	""" Get absolute path to resource, works for dev and for PyInstaller """
-	try:
-		# PyInstaller creates a temp folder and stores path in _MEIPASS
-		base_path = sys._MEIPASS
-	except Exception:
-		base_path = os.path.abspath(".")
+	""" Get absolute path to resource, works for dev and for PyInstaller, also works for android apps. """
+	if platform() in ("linux", "win", "mac"):
+		try:
+			# PyInstaller creates a temp folder and stores path in _MEIPASS
+			base_path = sys._MEIPASS
+		except Exception:
+			base_path = os.path.abspath(".")
+		return os.path.join(base_path, relative_path)
 
-	return os.path.join(base_path, relative_path)
-
-
+	elif platform() == "android":
+		path = "/data/data/org.test.pgame/files/app/"
+		return os.path.join(path, relative_path)
 
 def debounce(wait_time):
     """

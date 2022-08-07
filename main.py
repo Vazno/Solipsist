@@ -1,43 +1,12 @@
 import pygame
-import os
 import random
+import sys
 from random import randint
-from random import choice
-from dataclasses import dataclass
 
-from utils import resource_path
+from GSS import GameSettings, GameStatus, SCREEN
+from music import Music
 
-
-@dataclass
-class GameSettings():
-	#### Mechanics, changing it, won't give any effect ##########
-	WINDOW_WIDTH: int = 0
-	WINDOW_HEIGHT: int = 0
-	screen = None
-	#############################################################
-
-	FPS: int = 75
-	GAME_NAME: str = "Solipsist"
-	FONT = resource_path("Quinquefive-0Wonv.ttf")
-	DEFAULT_MUSIC_FOLDER = "sounds/music/"
-	DEFAULT_SOUND_FOLDER = "sounds/sounds/"
-	OBSTACLE_DEFAULT_VEL: int = -20 # It should be negative (Goes from right to left)
-
-
-
-	############# RGB ###############
-	PLAYER_COLOR = [255, 255, 255]
-	BACKGROUND = [0, 0, 0]
-	OBSTACLE_COLOR = [255, 255, 255]
-	#################################
-
-@dataclass
-class GameStatus:
-	is_game_started: bool = False
-	gameover: bool = False
-	is_music_playing: bool = False
-	current_music_name: str = ""
-	clicks: int = 0
+MUSIC =  Music()
 
 
 class Solipsist(GameSettings):
@@ -105,55 +74,20 @@ class Obstacle(GameSettings):
 		return obstacle_class
 
 
-class Music(GameStatus, GameSettings):
-	def __init__(self, music_folder: str = None) -> None:
-		if not music_folder:
-			self.DEFAULT_MUSIC_FOLDER = self.music_folder
-		super().__init__()
-
-	@classmethod
-	def make_description(cls):
-		_font = pygame.font.Font(cls.FONT, int(cls.WINDOW_WIDTH/100))
-		music_text = _font.render(f"Currently playing: {cls.current_music_name.split('.')[0].replace(cls.DEFAULT_MUSIC_FOLDER, '')}",True, (255,255,255))
-		cls.screen.blit(music_text, (int(cls.WINDOW_WIDTH/8), int(cls.WINDOW_HEIGHT/40)))
-
-	@classmethod
-	def pick_random_music(cls):
-		all_music = []
-		for music in os.listdir(cls.DEFAULT_MUSIC_FOLDER):
-			all_music.append(music)
-		random_music = f"{cls.DEFAULT_MUSIC_FOLDER}{choice(all_music)}"
-		return random_music
-
-	@staticmethod
-	def play_random_music():
-		if GameStatus.is_music_playing == False:
-			random_music_name = Music.pick_random_music()
-			music = pygame.mixer.Sound(resource_path(random_music_name))
-			music.play()
-			GameStatus.is_music_playing = True
-			GameStatus.current_music_name = random_music_name
-
-	@classmethod
-	def stop(cls):
-		if cls.is_music_playing:
-			pygame.mixer.stop()
-			GameStatus.is_music_playing = False
-			GameStatus.current_music_name = ""
-
-
 def main():
 	pygame.init()
-	screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
-	GameSettings.screen = screen
+	
+	GameSettings.screen = SCREEN
 	pygame.display.set_caption(GameSettings.GAME_NAME)
-	GameSettings.WINDOW_HEIGHT = screen.get_height()
-	GameSettings.WINDOW_WIDTH = screen.get_width()
+	GameSettings.WINDOW_HEIGHT = SCREEN.get_height()
+	GameSettings.WINDOW_WIDTH = SCREEN.get_width()
+
+
 
 	clock = pygame.time.Clock()
 	game_status = GameStatus(is_game_started=False, gameover=False)
 
-	solipsist = Solipsist(screen, int(GameSettings.WINDOW_WIDTH/3), int(GameSettings.WINDOW_HEIGHT/4), int(GameSettings.WINDOW_HEIGHT/15), 0.5)
+	solipsist = Solipsist(SCREEN, int(GameSettings.WINDOW_WIDTH/3), int(GameSettings.WINDOW_HEIGHT/4), int(GameSettings.WINDOW_HEIGHT/15), 0.5)
 	player = solipsist.get_rect()
 
 	obstacle_class = Obstacle.generate_random_obstacle()
@@ -162,16 +96,18 @@ def main():
 
 	run = True
 	while run:
-		screen.fill(GameSettings.BACKGROUND)
+		SCREEN.fill(GameSettings.BACKGROUND)
 
 
 		for event in pygame.event.get():
 
 			if event.type == pygame.QUIT:
 				run = False
+				pygame.quit()
+				sys.exit()
 
 			if event.type == pygame.MOUSEBUTTONDOWN and game_status.gameover is False:
-				Music.play_random_music()
+				MUSIC.play_random_music()
 				solipsist.jump()
 				game_status.is_game_started = True
 
@@ -180,7 +116,6 @@ def main():
 				run = False
 				main()
 
-					
 
 		if player[1] < GameSettings.WINDOW_HEIGHT - player.height and game_status.is_game_started is True and game_status.gameover is False:
 			solipsist.fall()
@@ -191,23 +126,20 @@ def main():
 				obstacle = obstacle_class.get_rect()
 	
 		# If player reached top, or bottom of window
-		if player[1] >= GameSettings.WINDOW_HEIGHT-player.height or player[1] < 0 or player.colliderect(obstacle):
-			
-			message = pygame.font.Font("Quinquefive-0Wonv.ttf", int(GameSettings.WINDOW_WIDTH/20))
-			text = message.render("Gameover", True, (255,255,255), (0,0,0))
-			screen.blit(text, (int(GameSettings.WINDOW_WIDTH/4), int(GameSettings.WINDOW_HEIGHT/3)))
-
-			Music.stop()
+		if player[1] >= GameSettings.WINDOW_HEIGHT-player.height or player[1] < 0 or player.colliderect(obstacle) and game_status.gameover is False:
+			MUSIC.stop()
 			if game_status.gameover is False:
 				x = pygame.mixer.Sound(GameSettings.DEFAULT_SOUND_FOLDER + "woosh.mp3")
 				x.play()
 			game_status.gameover = True
 			game_status.is_game_started = False
+			from gameover import gameover
+			gameover()
 
 
 		solipsist.draw_it()
 		obstacle_class.draw_it()
-		Music.make_description()
+		MUSIC.make_description()
 		pygame.display.flip()
 		clock.tick(GameSettings.FPS)
 
