@@ -4,24 +4,32 @@ import json
 from dataclasses import dataclass
 from utils import resource_path
 
+with open(resource_path("settings.json")) as f:
+	j = json.load(f)
 
-SCREEN = pygame.display.set_mode(flags=pygame.FULLSCREEN)
+if j["graphic"]["FULL_SCREEN"]:
+	SCREEN = pygame.display.set_mode(j["graphic"]["resolution"], flags=pygame.FULLSCREEN)
+else:
+	SCREEN = pygame.display.set_mode(j["graphic"]["resolution"])
 
 
 
 WINDOW_HEIGHT = SCREEN.get_height()
 WINDOW_WIDTH = SCREEN.get_width()
 
-with open(resource_path("settings.json")) as f:
-	j = json.load(f)
 
-video = j["video"]
-FPS = video["FPS"]
-OBSTACLE_DEFAULT_VEL = video["OBSTACLE_DEFAULT_VEL"]
+
+DESCRIPTION = j["DESCRIPTION"]
+
+game_settings = j["game_settings"]
+FPS = game_settings["FPS"]
+OBSTACLE_DEFAULT_VEL = game_settings["OBSTACLE_DEFAULT_VEL"]
 
 
 graphic = j["graphic"]
 GAME_NAME = graphic["GAME_NAME"]
+resolution = graphic["resolution"]
+FULL_SCREEN = graphic["FULL_SCREEN"]
 FONT = graphic["FONT"]
 FONT_COLOR = graphic["FONT_COLOR"]
 PLAYER_COLOR = graphic["PLAYER_COLOR"]
@@ -46,6 +54,8 @@ class GameStatus:
 	gameover: bool = False
 	is_music_playing: bool = False
 	current_music_name: str = ""
+	time_played: int = 0
+	clicks: int = 0
 
 
 def save_json():

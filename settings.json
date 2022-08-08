@@ -1,11 +1,17 @@
 {
-    "video": {
+    "DESCRIPTION": "Solipsist is a game made by Beksultan Artykbaev in the August of 2022",
+    "game_settings": {
         "FPS": 75,
-        "OBSTACLE_DEFAULT_VEL": -20
+        "OBSTACLE_DEFAULT_VEL": -25
     },
     "graphic": {
         "GAME_NAME": "Solipsist",
-        "FONT": "Quinquefive-0Wonv.ttf",
+        "resolution": [
+            0,
+            0
+        ],
+        "FULL_SCREEN": true,
+        "FONT": "fonts\\visitor2.ttf",
         "FONT_COLOR": [
             255,
             255,

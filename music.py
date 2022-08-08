@@ -21,7 +21,7 @@ class Music(GameStatus):
 
 	@classmethod
 	def make_description(cls):
-		_font = pygame.font.Font(FONT, int(WINDOW_WIDTH/100))
+		_font = pygame.font.Font(FONT, int(WINDOW_WIDTH/60))
 		music_text = _font.render(f"Currently playing: {cls.current_music_name.split('.')[0].replace(DEFAULT_MUSIC_FOLDER, '')}",True, FONT_COLOR)
 		SCREEN.blit(music_text, (int(WINDOW_WIDTH/8), int(WINDOW_HEIGHT/40)))
 
@@ -50,6 +50,16 @@ class Music(GameStatus):
 			GameStatus.current_music_name = ""
 
 	@staticmethod
-	def sound_woosh():
-		sound = pygame.mixer.Sound(resource_path(os.path.join(DEFAULT_SOUND_FOLDER, "woosh.mp3")))
+	def sound_dead():
+		sound = pygame.mixer.Sound(resource_path(os.path.join(DEFAULT_SOUND_FOLDER, "dead.mp3")))
+		sound.play()
+
+	@staticmethod
+	def sound_menu_click():
+		sound = pygame.mixer.Sound(resource_path(os.path.join(DEFAULT_SOUND_FOLDER, "menu_click.mp3")))
+		sound.play()
+
+	@staticmethod
+	def sound_jump():
+		sound = pygame.mixer.Sound(resource_path(os.path.join(DEFAULT_SOUND_FOLDER, "jump.mp3")))
 		sound.play()
