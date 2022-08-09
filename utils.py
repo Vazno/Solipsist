@@ -5,7 +5,6 @@ import sys
 import threading
 from sys import platform as _sys_platform
 
-
 def platform():
     if "ANDROID_ARGUMENT" in os.environ:
         return "android"
