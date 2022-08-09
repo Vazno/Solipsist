@@ -17,8 +17,6 @@ from music import Music
 
 MUSIC = Music()
 
-print(WINDOW_HEIGHT)
-print(WINDOW_WIDTH)
 class Solipsist:
     """The main character's class."""
 
