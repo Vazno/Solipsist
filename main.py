@@ -2,17 +2,13 @@ import sys
 
 import pygame
 
-from GSS import FPS, GAME_NAME, SCREEN, FONT, BACKGROUND, FONT_COLOR, WINDOW_HEIGHT, WINDOW_WIDTH
+from GSS import SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
 from game import MUSIC, main
 from pygame_utils import Button
 
 
-
-
-
-
 def main_menu():
-	pygame.display.set_caption(GAME_NAME)
+	pygame.display.set_caption(j["graphic"]["GAME_NAME"])
 	pygame.init()
 
 	clock = pygame.time.Clock()
@@ -26,7 +22,7 @@ def main_menu():
 
 	run = True
 	while run:
-		SCREEN.fill(BACKGROUND)
+		SCREEN.fill(j["graphic"]["BACKGROUND"])
 		MUSIC.stop()
 		events = pygame.event.get()
 		for event in events:
@@ -54,7 +50,6 @@ def main_menu():
 
 		if quit_button.clicked(events):
 			MUSIC.sound_menu_click()
-			run = False
 			sys.exit()
 
 		if solipsist_button.clicked(events):
@@ -69,7 +64,7 @@ def main_menu():
 		quit_button.draw_it(SCREEN)
 
 		pygame.display.flip()
-		clock.tick(FPS)
+		clock.tick(j["game_settings"]["FPS"])
 
 if __name__ == "__main__":
 	main_menu()

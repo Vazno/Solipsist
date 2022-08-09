@@ -2,7 +2,7 @@
     "DESCRIPTION": "Solipsist is a game made by Beksultan Artykbaev in the August of 2022",
     "game_settings": {
         "FPS": 75,
-        "OBSTACLE_DEFAULT_VEL": -25
+        "OBSTACLE_DEFAULT_VEL": 0
     },
     "graphic": {
         "GAME_NAME": "Solipsist",
@@ -40,6 +40,7 @@
     },
     "stats": {
         "CLICKS": 0,
-        "TIME_PLAYED": 0
+        "TIME_PLAYED": 0,
+        "BEST_RECORD": 0
     }
 }

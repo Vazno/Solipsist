@@ -4,7 +4,7 @@ from game import MUSIC
 from main import main_menu
 
 from pygame_utils import Button
-from GSS import BACKGROUND, SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, SCREEN
+from GSS import SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, SCREEN
 from GSS import j
 
 def about():
@@ -12,7 +12,7 @@ def about():
 	description_button = Button(j['DESCRIPTION'], (WINDOW_WIDTH/2.2, WINDOW_HEIGHT/2), (WINDOW_WIDTH/15, WINDOW_HEIGHT/15), False)
 	run = True
 	while run:
-		SCREEN.fill(BACKGROUND)
+		SCREEN.fill(j["graphic"]["BACKGROUND"])
 		events = pygame.event.get()
 		for event in events:
 			if event.type == pygame.QUIT:

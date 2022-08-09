@@ -18,34 +18,9 @@ WINDOW_HEIGHT = SCREEN.get_height()
 WINDOW_WIDTH = SCREEN.get_width()
 
 
-
-DESCRIPTION = j["DESCRIPTION"]
-
-game_settings = j["game_settings"]
-FPS = game_settings["FPS"]
-OBSTACLE_DEFAULT_VEL = game_settings["OBSTACLE_DEFAULT_VEL"]
-
-
-graphic = j["graphic"]
-GAME_NAME = graphic["GAME_NAME"]
-resolution = graphic["resolution"]
-FULL_SCREEN = graphic["FULL_SCREEN"]
-FONT = graphic["FONT"]
-FONT_COLOR = graphic["FONT_COLOR"]
-PLAYER_COLOR = graphic["PLAYER_COLOR"]
-BACKGROUND = graphic["BACKGROUND"]
-OBSTACLE_COLOR = graphic["OBSTACLE_COLOR"]
-
-
-music = j["music"]
-VOLUME = music["VOLUME"]
-DEFAULT_MUSIC_FOLDER = resource_path(music["DEFAULT_MUSIC_FOLDER"])
-DEFAULT_SOUND_FOLDER = resource_path(music["DEFAULT_SOUND_FOLDER"])
-
-
-stats = j["stats"]
-CLICKS = stats["CLICKS"]
-TIME_PLAYED = stats["TIME_PLAYED"]
+OBSTACLE_DEFAULT_VEL = j["game_settings"]["OBSTACLE_DEFAULT_VEL"]
+if OBSTACLE_DEFAULT_VEL == 0:
+	OBSTACLE_DEFAULT_VEL = -WINDOW_WIDTH/100
 
 
 @dataclass

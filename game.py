@@ -7,15 +7,10 @@ from time import time
 
 from GSS import GameStatus
 from GSS import save_json
-from GSS import GAME_NAME
 from GSS import SCREEN
 from GSS import WINDOW_HEIGHT
 from GSS import WINDOW_WIDTH
-from GSS import OBSTACLE_COLOR
-from GSS import PLAYER_COLOR
 from GSS import OBSTACLE_DEFAULT_VEL
-from GSS import BACKGROUND
-from GSS import FPS
 from GSS import j
 
 from music import Music
@@ -35,7 +30,7 @@ class Solipsist():
 		self.grav = grav
 		self.SCREEN_HEIGHT = screen.get_height()
 		if not color:
-			self.color = PLAYER_COLOR
+			self.color = j["graphic"]["PLAYER_COLOR"]
 
 	def get_rect(self):
 		return self.player
@@ -62,7 +57,7 @@ class Obstacle():
 		self.speed = speed
 		self.SCREEN_HEIGHT = screen.get_height()
 		if not color:
-			self.color = OBSTACLE_COLOR
+			self.color = j["graphic"]["OBSTACLE_COLOR"]
 
 	def get_rect(self):
 		return self.obstacle
@@ -88,12 +83,15 @@ class Obstacle():
 
 
 def main():
-	pygame.display.set_caption(GAME_NAME)
+	pygame.display.set_caption(j["graphic"]["GAME_NAME"])
 
 	clock = pygame.time.Clock()
 	game_status = GameStatus(is_game_started=False, gameover=False)
-
-	solipsist = Solipsist(SCREEN, int(WINDOW_WIDTH/3), int(WINDOW_HEIGHT/4), int(WINDOW_HEIGHT/15), 0.5)
+	if WINDOW_HEIGHT > WINDOW_WIDTH:
+		solipsist = Solipsist(SCREEN, int(WINDOW_WIDTH/3), int(WINDOW_HEIGHT/4), int(WINDOW_WIDTH/15), WINDOW_HEIGHT/1500)
+	else:
+		solipsist = Solipsist(SCREEN, int(WINDOW_WIDTH/3), int(WINDOW_HEIGHT/4), int(WINDOW_HEIGHT/15), WINDOW_HEIGHT/1500)
+	
 	player = solipsist.get_rect()
 
 	obstacle_class = Obstacle.generate_random_obstacle()
@@ -105,7 +103,7 @@ def main():
 
 	run = True
 	while run:
-		SCREEN.fill(BACKGROUND)
+		SCREEN.fill(j["graphic"]["BACKGROUND"])
 		MUSIC.play_random_music()
 
 		for event in pygame.event.get():
@@ -154,4 +152,4 @@ def main():
 			j["stats"]["TIME_PLAYED"] += 1
 			previousPointAwardedTime = current_time
 		save_json()
-		clock.tick(FPS)
+		clock.tick(j["game_settings"]["FPS"])

@@ -1,6 +1,6 @@
 import pygame
 from typing import Tuple
-from GSS import FONT, FONT_COLOR, BACKGROUND
+from GSS import j
 
 #Takes rectangle's size, position and a point. Returns true if that
 #point is inside the rectangle and false if it isnt.
@@ -16,14 +16,14 @@ class Button:
         self.size = size
 
         self.button = pygame.Surface(size).convert()
-        self.button.fill(BACKGROUND)
+        self.button.fill(j["graphic"]["BACKGROUND"])
         self.outline = outline
 
         #Text is about 70% the height of the button
-        font = pygame.font.Font(FONT, int((70/100)*self.size[1]))
+        font = pygame.font.Font(j["graphic"]["FONT"], int((70/100)*self.size[1]))
 
         #First argument always requires a str, so f-string is used.
-        self.textSurf = font.render(f"{text}", True, FONT_COLOR)
+        self.textSurf = font.render(f"{text}", True, j["graphic"]["FONT_COLOR"])
 
     def clicked(self, events)->None:
         mousePos = pygame.mouse.get_pos()
