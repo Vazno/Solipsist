@@ -11,7 +11,7 @@
             0
         ],
         "FULL_SCREEN": true,
-        "FONT": "fonts\\712_serif.ttf",
+        "FONT": "fonts/712_serif.ttf",
         "FONT_COLOR": [
             255,
             255,
@@ -39,8 +39,8 @@
         "DEFAULT_SOUND_FOLDER": "sounds/sounds/"
     },
     "stats": {
-        "CLICKS": 0,
-        "TIME_PLAYED": 0,
-        "BEST_RECORD": 0
+        "CLICKS": 15,
+        "TIME_PLAYED": 8,
+        "BEST_RECORD": 2
     }
 }
