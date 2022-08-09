@@ -1,4 +1,3 @@
-from turtle import window_height, window_width
 import pygame
 import random
 import sys
