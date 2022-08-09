@@ -39,8 +39,8 @@
         "DEFAULT_SOUND_FOLDER": "sounds/sounds/"
     },
     "stats": {
-        "CLICKS": 15,
-        "TIME_PLAYED": 8,
-        "BEST_RECORD": 2
+        "CLICKS": 0,
+        "TIME_PLAYED": 0,
+        "BEST_RECORD": 0
     }
 }
