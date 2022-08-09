@@ -16,7 +16,6 @@ from music import Music
 
 MUSIC = Music()
 
-
 class Solipsist:
     """The main character's class."""
 
@@ -77,7 +76,7 @@ class Obstacle:
         """Generates obstacles going from the right of the screen"""
         obstacle_class = Obstacle(
             SCREEN,
-            randint(WINDOW_WIDTH, WINDOW_WIDTH + WINDOW_WIDTH / 10),
+            randint(WINDOW_WIDTH, int(WINDOW_WIDTH + WINDOW_WIDTH / 10)),
             WINDOW_HEIGHT / random.randint(2, 10),
             WINDOW_WIDTH / random.randint(30, 40),
             WINDOW_HEIGHT / random.randint(2, 10),
