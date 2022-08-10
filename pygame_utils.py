@@ -1,6 +1,7 @@
 import pygame
 from typing import Tuple
 from GSS import j
+from utils import resource_path
 
 # Takes rectangle's size, position and a point. Returns true if that
 # point is inside the rectangle and false if it isnt.
@@ -23,7 +24,7 @@ class Button:
         self.outline = outline
 
         # Text is about 70% the height of the button
-        font = pygame.font.Font(j["graphic"]["FONT"], int((70 / 100) * self.size[1]))
+        font = pygame.font.Font(resource_path(j["graphic"]["FONT"]), int((70 / 100) * self.size[1]))
 
         # First argument always requires a str, so f-string is used.
         self.textSurf = font.render(f"{text}", True, j["graphic"]["FONT_COLOR"])
