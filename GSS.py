@@ -14,27 +14,24 @@ from utils import resource_path
 GAME_NAME = "Solipsist"
 
 
-def create_user_data():
-    data_folder = Path(user_data_dir(appname=GAME_NAME, appauthor=""))
-    if not data_folder.exists():
-        data_folder.mkdir(exist_ok=True)
-        with open(resource_path("settings.json"), "r") as old_json:
-            json_to_save = json.load(old_json)
 
-        with open(os.path.join(data_folder, "settings.json"), "w") as new_json_file:
-            json.dump(json_to_save, new_json_file, indent=4)
+def create_user_data():
+    data_folder = Path(os.path.join(user_data_dir(), GAME_NAME))
+    data_folder.mkdir(exist_ok=True)
+    with open(resource_path("settings.json"), "r") as old_json:
+        json_to_save = json.load(old_json)
+
+    with open(os.path.join(data_folder, "settings.json"), "w") as new_json_file:
+        json.dump(json_to_save, new_json_file, indent=4)
 
 
 try:
-    with open(
-        os.path.join(user_data_dir(appname=GAME_NAME, appauthor=""), "settings.json")
-    ) as f:
+    with open(os.path.join(os.path.join(user_data_dir(), GAME_NAME), "settings.json")) as f:
         j = json.load(f)
 except FileNotFoundError:
     create_user_data()
     with open(
-        os.path.join(user_data_dir(appname=GAME_NAME, appauthor=""), "settings.json")
-    ) as f:
+        os.path.join(os.path.join(user_data_dir(), GAME_NAME), "settings.json")) as f:
         j = json.load(f)
 
 if j["graphic"]["FULL_SCREEN"]:
@@ -65,6 +62,6 @@ class GameStatus:
 
 
 def save_json():
-    data_folder = Path(user_data_dir(appname=j["graphic"]["GAME_NAME"], appauthor=""))
+    data_folder = Path(os.path.join(user_data_dir(), GAME_NAME))
     with open(os.path.join(data_folder, "settings.json"), "w") as f:
         json.dump(j, f, indent=4)

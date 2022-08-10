@@ -31,7 +31,11 @@
             255,
             255,
             255
-        ]
+        ],
+		"InputBox": {
+			"COLOR_ACTIVE": [255, 255, 255],
+			"COLOR_INACTIVE": [150, 150, 150]
+		}
     },
     "music": {
         "VOLUME": 1,

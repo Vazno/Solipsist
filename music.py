@@ -40,7 +40,9 @@ class Music(GameStatus):
         if GameStatus.is_music_playing == False:
             random_music_name = Music.pick_random_music()
             music = pygame.mixer.Sound(resource_path(random_music_name))
+            music.set_volume(j["music"]["VOLUME"])
             music.play()
+            
             GameStatus.is_music_playing = True
             GameStatus.current_music_name = random_music_name
 

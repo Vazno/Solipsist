@@ -66,7 +66,9 @@ def main_menu():
 
         if options_button.clicked(events):
             MUSIC.sound_menu_click()
-            print("Options button clicked")
+            from options import options
+
+            options()
 
         if stats_button.clicked(events):
             MUSIC.sound_menu_click()
