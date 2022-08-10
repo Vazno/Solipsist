@@ -1,12 +1,41 @@
 """Game status & game settings data handlers"""
+import os
 import pygame
 import json
 from dataclasses import dataclass
+from pathlib import Path
+try:
+	from appdirs import user_data_dir
+except ModuleNotFoundError:
+	print("### pip install appdirs ###")
 
 from utils import resource_path
 
-with open(resource_path("settings.json")) as f:
-    j = json.load(f)
+GAME_NAME = "Solipsist"
+
+
+def create_user_data():
+    data_folder = Path(user_data_dir(appname=GAME_NAME, appauthor=""))
+    if not data_folder.exists():
+        data_folder.mkdir(exist_ok=True)
+        with open(resource_path("settings.json"), "r") as old_json:
+            json_to_save = json.load(old_json)
+
+        with open(os.path.join(data_folder, "settings.json"), "w") as new_json_file:
+            json.dump(json_to_save, new_json_file, indent=4)
+
+
+try:
+    with open(
+        os.path.join(user_data_dir(appname=GAME_NAME, appauthor=""), "settings.json")
+    ) as f:
+        j = json.load(f)
+except FileNotFoundError:
+    create_user_data()
+    with open(
+        os.path.join(user_data_dir(appname=GAME_NAME, appauthor=""), "settings.json")
+    ) as f:
+        j = json.load(f)
 
 if j["graphic"]["FULL_SCREEN"]:
     SCREEN = pygame.display.set_mode(
@@ -36,5 +65,6 @@ class GameStatus:
 
 
 def save_json():
-    with open(resource_path("settings.json"), "w") as f:
+    data_folder = Path(user_data_dir(appname=j["graphic"]["GAME_NAME"], appauthor=""))
+    with open(os.path.join(data_folder, "settings.json"), "w") as f:
         json.dump(j, f, indent=4)

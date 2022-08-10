@@ -2,13 +2,13 @@ import sys
 
 import pygame
 
-from GSS import SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
+from GSS import GAME_NAME, SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
 from game import MUSIC, main
 from pygame_utils import Button
 
 
 def main_menu():
-    pygame.display.set_caption(j["graphic"]["GAME_NAME"])
+    pygame.display.set_caption(GAME_NAME)
     pygame.init()
 
     clock = pygame.time.Clock()

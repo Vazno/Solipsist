@@ -4,7 +4,7 @@ import sys
 from random import randint
 from time import time
 
-from GSS import GameStatus
+from GSS import GAME_NAME, GameStatus
 from GSS import save_json
 from GSS import j
 from GSS import SCREEN
@@ -86,7 +86,7 @@ class Obstacle:
 
 
 def main():
-    pygame.display.set_caption(j["graphic"]["GAME_NAME"])
+    pygame.display.set_caption(GAME_NAME)
 
     clock = pygame.time.Clock()
     game_status = GameStatus(is_game_started=False, gameover=False)
