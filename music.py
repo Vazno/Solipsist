@@ -17,7 +17,7 @@ class Music(GameStatus):
 
     @classmethod
     def make_description(cls):
-        _font = pygame.font.Font(j["graphic"]["FONT"], int(WINDOW_WIDTH / 60))
+        _font = pygame.font.Font(resource_path(j["graphic"]["FONT"]), int(WINDOW_WIDTH / 60))
         music_text = _font.render(
             f"Currently playing: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
             True,
