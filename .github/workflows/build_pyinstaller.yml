@@ -37,17 +37,17 @@ jobs:
         include:
           - os: macos-latest
             TARGET: macos
-            CMD_BUILD: pyinstaller main.spec
+            CMD_BUILD: pyinstaller --noconfirm --onedir --windowed --add-data "/sounds/:." --add-data "/fonts/:." -n Solipsist-macos main.py
             OUT_FILE_NAME: Solipsist-macos
             ASSET_MIME: application/octet-stream
           - os: windows-latest
             TARGET: windows
-            CMD_BUILD: pyinstaller main.spec
+            CMD_BUILD: pyinstaller --noconfirm --onedir --windowed --add-data "/sounds/;." --add-data "/fonts/;." -n Solipsist-windows main.py
             OUT_FILE_NAME: Solipsist-windows.exe
             ASSET_MIME: application/vnd.microsoft.portable-executable
           - os: ubuntu-latest
             TARGET: x86_64-linux-gnu
-            CMD_BUILD: pyinstaller main.spec
+            CMD_BUILD: pyinstaller --noconfirm --onedir --windowed --add-data "/sounds/:." --add-data "/fonts/:." -n Solipsist-linux main.py
             OUT_FILE_NAME: Solipsist-linux
             ASSET_MIME: application/octet-stream
     steps:
