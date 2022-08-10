@@ -5,9 +5,9 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 try:
-	from appdirs import user_data_dir
+	from platformdirs import user_data_dir
 except ModuleNotFoundError:
-	print("### pip install appdirs ###")
+	print("### pip install platformdirs ###")
 
 from utils import resource_path
 
