@@ -39,6 +39,7 @@
     },
     "music": {
         "VOLUME": 1,
+        "EFFECT_VOLUME": 1,
         "DEFAULT_MUSIC_FOLDER": "sounds/music/",
         "DEFAULT_SOUND_FOLDER": "sounds/sounds/"
     },

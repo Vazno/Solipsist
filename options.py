@@ -16,8 +16,14 @@ def options():
         False,
     )
     volume_button = Button(
-        f"Music volume {j['music']['VOLUME']}",
+        f"Music volume: {j['music']['VOLUME']}",
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 4),
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
+        False,
+    )
+    effect_volume_button = Button(
+        f"Effect volume: {j['music']['EFFECT_VOLUME']}",
+        (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 4.9),
         (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
         False,
     )
@@ -108,11 +114,19 @@ def options():
 
         if volume_button.clicked(events):
             if j["music"]["VOLUME"] >= 1:
-                j["music"]["VOLUME"] = 0
+                j["music"]["VOLUME"] = 0.0
             else:
                 j["music"]["VOLUME"] = round(j["music"]["VOLUME"] + 0.1, 1)
             save_json()
-            volume_button.change_text(f"Music volume {j['music']['VOLUME']}")
+            volume_button.change_text(f"Music volume: {j['music']['VOLUME']}")
+
+        if effect_volume_button.clicked(events):
+            if j["music"]["EFFECT_VOLUME"] >= 1:
+                j["music"]["EFFECT_VOLUME"] = 0.0
+            else:
+                j["music"]["EFFECT_VOLUME"] = round(j["music"]["EFFECT_VOLUME"] + 0.1, 1)
+            save_json()
+            effect_volume_button.change_text(f"Effect volume: {j['music']['EFFECT_VOLUME']}")
 
         if full_screen_button.clicked(events):
             full_screen = not j["graphic"]["FULL_SCREEN"]
@@ -127,6 +141,7 @@ def options():
             main_menu()
 
         go_back_button.draw_it(SCREEN)
+        effect_volume_button.draw_it(SCREEN)
         volume_button.draw_it(SCREEN)
 
         fps_button.draw_it(SCREEN)

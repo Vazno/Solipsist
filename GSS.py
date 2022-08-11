@@ -25,7 +25,7 @@ def create_user_data():
         json.dump(json_to_save, new_json_file, indent=4)
 
     with open(os.path.join(data_folder, "settings.json"), "r") as new_json_file:
-        j = json.load(new_json_file, indent=4)
+        j = json.load(new_json_file)
 
 
 try:

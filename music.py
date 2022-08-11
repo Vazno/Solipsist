@@ -65,6 +65,7 @@ class Music(GameStatus):
                 )
             )
         )
+        sound.set_volume(j["music"]["EFFECT_VOLUME"])
         sound.play()
 
     @staticmethod
@@ -77,6 +78,7 @@ class Music(GameStatus):
                 )
             )
         )
+        sound.set_volume(j["music"]["EFFECT_VOLUME"])
         sound.play()
 
     @staticmethod
@@ -89,6 +91,7 @@ class Music(GameStatus):
                 )
             )
         )
+        sound.set_volume(j["music"]["EFFECT_VOLUME"])
         sound.play()
 
     @staticmethod
@@ -101,4 +104,5 @@ class Music(GameStatus):
                 )
             )
         )
+        sound.set_volume(j["music"]["EFFECT_VOLUME"])
         sound.play()
