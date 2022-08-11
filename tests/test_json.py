@@ -2,7 +2,7 @@ import json
 
 
 def test_json():
-    from utils import resource_path
+    from solipsist.utils import resource_path
 
     with open(resource_path("settings.json")) as f:
         test_j = json.load(f)
