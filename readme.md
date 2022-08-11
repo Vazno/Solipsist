@@ -2,8 +2,8 @@
 
 This is a game where you need to control solipsist (Cube) that moves past obstacles.
 
-![Main Menu](images/MainMenu.png)
-![Gameplay](images/Gameplay.png)
+![Main Menu](readme_images/MainMenu.png)
+![Gameplay](readme_images/Gameplay.png)
 
 ## Installation
 
