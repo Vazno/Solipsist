@@ -17,7 +17,9 @@ class Music(GameStatus):
 
     @classmethod
     def make_description(cls):
-        _font = pygame.font.Font(resource_path(j["graphic"]["FONT"]), int(WINDOW_WIDTH / 60))
+        _font = pygame.font.Font(
+            resource_path(j["graphic"]["FONT"]), int(WINDOW_WIDTH / 60)
+        )
         music_text = _font.render(
             f"Currently playing: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
             True,
@@ -42,7 +44,7 @@ class Music(GameStatus):
             music = pygame.mixer.Sound(resource_path(random_music_name))
             music.set_volume(j["music"]["VOLUME"])
             music.play()
-            
+
             GameStatus.is_music_playing = True
             GameStatus.current_music_name = random_music_name
 

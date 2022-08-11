@@ -16,6 +16,7 @@ from music import Music
 
 MUSIC = Music()
 
+
 class Solipsist:
     """The main character's class."""
 

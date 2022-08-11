@@ -4,15 +4,15 @@ import pygame
 import json
 from dataclasses import dataclass
 from pathlib import Path
+
 try:
-	from platformdirs import user_data_dir
+    from platformdirs import user_data_dir
 except ModuleNotFoundError:
-	print("### pip install platformdirs ###")
+    print("### pip install platformdirs ###")
 
 from utils import resource_path
 
 GAME_NAME = "Solipsist"
-
 
 
 def create_user_data():
@@ -24,23 +24,38 @@ def create_user_data():
     with open(os.path.join(data_folder, "settings.json"), "w") as new_json_file:
         json.dump(json_to_save, new_json_file, indent=4)
 
+    with open(os.path.join(data_folder, "settings.json"), "r") as new_json_file:
+        j = json.load(new_json_file, indent=4)
+
 
 try:
-    with open(os.path.join(os.path.join(user_data_dir(), GAME_NAME), "settings.json")) as f:
+    with open(
+        os.path.join(os.path.join(user_data_dir(), GAME_NAME), "settings.json")
+    ) as f:
         j = json.load(f)
 except FileNotFoundError:
     create_user_data()
     with open(
-        os.path.join(os.path.join(user_data_dir(), GAME_NAME), "settings.json")) as f:
+        os.path.join(os.path.join(user_data_dir(), GAME_NAME), "settings.json")
+    ) as f:
         j = json.load(f)
 
 if j["graphic"]["FULL_SCREEN"]:
-    SCREEN = pygame.display.set_mode(
-        j["graphic"]["resolution"], flags=pygame.FULLSCREEN
-    )
+    try:
+        SCREEN = pygame.display.set_mode(
+            j["graphic"]["resolution"], flags=pygame.FULLSCREEN
+        )
+    except pygame.error:
+        create_user_data()
+        SCREEN = pygame.display.set_mode(
+            j["graphic"]["resolution"], flags=pygame.FULLSCREEN
+        )
 else:
-    SCREEN = pygame.display.set_mode(j["graphic"]["resolution"])
-
+    try:
+        SCREEN = pygame.display.set_mode(j["graphic"]["resolution"])
+    except pygame.error:
+        create_user_data()
+        SCREEN = pygame.display.set_mode(j["graphic"]["resolution"])
 
 WINDOW_HEIGHT = SCREEN.get_height()
 WINDOW_WIDTH = SCREEN.get_width()
