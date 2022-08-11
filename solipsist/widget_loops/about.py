@@ -1,7 +1,7 @@
 import sys
 import pygame
 
-from game import MUSIC
+from widget_loops.game import MUSIC
 from main import main_menu
 from pygame_utils import Button
 
@@ -21,7 +21,7 @@ def about():
     description_button = Button(
         j["DESCRIPTION"],
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
+        (WINDOW_WIDTH / 19, WINDOW_HEIGHT / 19),
         False,
     )
     run = True

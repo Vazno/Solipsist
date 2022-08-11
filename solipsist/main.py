@@ -3,7 +3,7 @@ import sys
 import pygame
 
 from GSS import GAME_NAME, SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
-from game import MUSIC, main
+from widget_loops.game import MUSIC, main
 from pygame_utils import Button
 
 
@@ -66,19 +66,19 @@ def main_menu():
 
         if options_button.clicked(events):
             MUSIC.sound_menu_click()
-            from options import options
+            from widget_loops.options import options
 
             options()
 
         if stats_button.clicked(events):
             MUSIC.sound_menu_click()
-            from stats import stats
+            from widget_loops.stats import stats
 
             stats()
 
         if about_button.clicked(events):
             MUSIC.sound_menu_click()
-            from about import about
+            from widget_loops.about import about
 
             about()
 

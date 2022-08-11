@@ -2,7 +2,7 @@ import sys
 import pygame
 import datetime
 
-from game import MUSIC
+from widget_loops.game import MUSIC
 from main import main_menu
 from pygame_utils import Button
 

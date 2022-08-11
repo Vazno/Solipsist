@@ -4,7 +4,7 @@ import pygame
 from GSS import SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, save_json
 from GSS import j
 from main import main_menu
-from game import MUSIC
+from widget_loops.game import MUSIC
 from pygame_utils import Button, InputBox
 
 
@@ -28,7 +28,7 @@ def options():
         False,
     )
     fps_button = Button(
-        "FPS",
+        "FPS:",
         (WINDOW_WIDTH / 2.6, WINDOW_HEIGHT / 3.05),
         (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
         False,

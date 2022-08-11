@@ -153,7 +153,7 @@ def main():
             pygame.display.flip()
             game_status.gameover = True
             game_status.is_game_started = False
-            from gameover import gameover  # Left it here, to avoid circular import
+            from widget_loops.gameover import gameover  # Left it here, to avoid circular import
 
             gameover(game_status.time_played, game_status.clicks)
 
