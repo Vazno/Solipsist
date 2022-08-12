@@ -5,7 +5,7 @@ import pygame
 from GSS import GAME_NAME, SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
 from widget_loops.game import MUSIC, main
 from pygame_utils import Button
-
+# Some imports are below, to prevent circular import
 
 def main_menu():
     pygame.display.set_caption(GAME_NAME)

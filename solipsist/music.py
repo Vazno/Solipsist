@@ -11,9 +11,8 @@ from GSS import WINDOW_WIDTH
 
 
 class Music(GameStatus):
-    def __init__(self, music_folder: str = None) -> None:
-        if music_folder != None:
-            DEFAULT_MUSIC_FOLDER = self.music_folder
+    def __init__(self) -> None:
+        pass
 
     @classmethod
     def make_description(cls):

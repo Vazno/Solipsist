@@ -1,4 +1,4 @@
-"""Unrelated to game functions and stuff"""
+"""Unrelated to game functions, and stuff"""
 
 import os
 import sys

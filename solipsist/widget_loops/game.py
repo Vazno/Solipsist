@@ -1,7 +1,6 @@
 import pygame
 import random
 import sys
-from random import randint
 from time import time
 
 from GSS import GAME_NAME, GameStatus
@@ -68,7 +67,7 @@ class Obstacle:
         pygame.draw.rect(self.screen, self.color, self.obstacle)
 
     def move(self, num: int = None):
-        if num == None:
+        if num is None:
             num = OBSTACLE_DEFAULT_VEL
         self.obstacle.x += num
 
@@ -77,7 +76,7 @@ class Obstacle:
         """Generates obstacles going from the right of the screen"""
         obstacle_class = Obstacle(
             SCREEN,
-            randint(WINDOW_WIDTH, int(WINDOW_WIDTH + WINDOW_WIDTH / 10)),
+            random.randint(WINDOW_WIDTH, int(WINDOW_WIDTH + WINDOW_WIDTH / 10)),
             WINDOW_HEIGHT / random.randint(2, 10),
             WINDOW_WIDTH / random.randint(30, 40),
             WINDOW_HEIGHT / random.randint(2, 10),
