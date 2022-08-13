@@ -3,6 +3,7 @@ import os
 from random import choice
 
 from utils import debounce, resource_path
+from pygame_utils import Button
 from GSS import GameStatus
 from GSS import j
 from GSS import SCREEN
@@ -16,16 +17,9 @@ class Music(GameStatus):
 
     @classmethod
     def make_description(cls):
-        _font = pygame.font.Font(
-            resource_path(j["graphic"]["FONT"]), int(WINDOW_WIDTH / 60)
-        )
-        music_text = _font.render(
-            f"Currently playing: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
-            True,
-            j["graphic"]["FONT_COLOR"],
-        )
-        SCREEN.blit(music_text, (int(WINDOW_WIDTH / 8), int(WINDOW_HEIGHT / 40)))
-
+        music_text = Button(f"Currently playing: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
+        (int(WINDOW_WIDTH / 5), int(WINDOW_HEIGHT / 40)), (int(WINDOW_WIDTH / 60), int(WINDOW_WIDTH / 60)))
+        music_text.draw_it(SCREEN)
     @classmethod
     def pick_random_music(cls):
         all_music = []

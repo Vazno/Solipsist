@@ -14,15 +14,13 @@ from GSS import WINDOW_WIDTH
 def about():
     go_back_button = Button(
         "Go back",
-        (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 1.5),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.5),
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
     )
     description_button = Button(
         j["DESCRIPTION"],
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
-        (WINDOW_WIDTH / 19, WINDOW_HEIGHT / 19),
-        False,
+        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15)
     )
     run = True
     while run:

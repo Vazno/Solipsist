@@ -15,39 +15,33 @@ def main_menu():
 
     solipsist_button = Button(
         "Solipsist",
-        (WINDOW_WIDTH / 2.6, WINDOW_HEIGHT / 10),
-        (WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5),
-        False,
+        (WINDOW_WIDTH / 2.5, WINDOW_HEIGHT / 10),
+        (WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5)
     )
     start_button = Button(
         "Start",
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 3),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15)
     )
     options_button = Button(
         "Options",
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 2.4),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 8, WINDOW_HEIGHT / 15)
     )
     stats_button = Button(
         "Stats",
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 2),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15)
     )
     about_button = Button(
         "About",
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 1.70),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15)
     )
     quit_button = Button(
         "Quit",
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 1.5),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15)
     )
 
     run = True

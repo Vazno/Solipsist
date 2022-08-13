@@ -14,7 +14,7 @@ def pointInRectangle(px, py, rw, rh, rx, ry):
 
 class Button:
     def __init__(
-        self, text: str, position: Tuple, size: Tuple = (200, 50), outline: bool = True
+        self, text: str, position: Tuple, size: Tuple = (200, 50), outline: bool = False
     ) -> None:
         self.position = position
         self.size = size

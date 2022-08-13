@@ -11,67 +11,60 @@ from pygame_utils import Button, InputBox
 def options():
     go_back_button = Button(
         "Go back",
-        (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 1.5),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.5),
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
     )
     volume_button = Button(
         f"Music volume: {j['music']['VOLUME']}",
-        (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 4),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 4),
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
     )
     effect_volume_button = Button(
         f"Effect volume: {j['music']['EFFECT_VOLUME']}",
-        (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 4.9),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 5.5),
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
     )
     fps_button = Button(
         "FPS:",
-        (WINDOW_WIDTH / 2.6, WINDOW_HEIGHT / 3.05),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 3),
+        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15)
     )
     full_screen_button = Button(
         f"Full Screen: {j['graphic']['FULL_SCREEN']}",
-        (WINDOW_WIDTH / 2.65, WINDOW_HEIGHT / 2.15),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2.5),
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
     )
     width_button = Button(
         "Width:",
-        (WINDOW_WIDTH / 2.65, WINDOW_HEIGHT / 1.85),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2.1),
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
     )
     height_button = Button(
         "Height:",
-        (WINDOW_WIDTH / 2.69, WINDOW_HEIGHT / 1.69),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
-        False,
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.8),
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
     )
 
     fps_input_box = InputBox(
         WINDOW_WIDTH / 2.1,
-        WINDOW_HEIGHT / 2.9,
+        WINDOW_HEIGHT / 2.92,
         WINDOW_WIDTH / 25,
         WINDOW_HEIGHT / 25,
         str(j["game_settings"]["FPS"]),
     )
     window_width_box = InputBox(
         WINDOW_WIDTH / 2.1,
-        WINDOW_HEIGHT / 1.8,
+        WINDOW_HEIGHT / 2.02,
         WINDOW_WIDTH / 25,
         WINDOW_HEIGHT / 25,
-        str(WINDOW_WIDTH),
+        str(j["graphic"]["resolution"][0]),
     )
     window_height_box = InputBox(
         WINDOW_WIDTH / 2.1,
-        WINDOW_HEIGHT / 1.65,
+        WINDOW_HEIGHT / 1.72,
         WINDOW_WIDTH / 25,
         WINDOW_HEIGHT / 25,
-        str(WINDOW_HEIGHT),
+        str(j["graphic"]["resolution"][1]),
     )
     run = True
     while run:
