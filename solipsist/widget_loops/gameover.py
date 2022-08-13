@@ -26,22 +26,22 @@ def gameover(time_played: int, clicks: int):
     gameover_button = Button(
         "Gameover",
         (WINDOW_WIDTH / 2.6, WINDOW_HEIGHT / 10),
-        (WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5)
+        (WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5),
     )
     clicks_button = Button(
         f"Clicks: {clicks}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
     time_button = Button(
         f"{time_message} {datetime.timedelta(seconds=time_played)}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2.4),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
 
     run = True
     while run:
-        SCREEN.fill(j["graphic"]["BACKGROUND"])
+        SCREEN.fill(j["graphic"]["BACKGROUND"][j["graphic"]["theme"]])
         MUSIC.stop()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

@@ -15,16 +15,16 @@ def about():
     go_back_button = Button(
         "Go back",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.5),
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     description_button = Button(
         j["DESCRIPTION"],
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
-        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
     )
     run = True
     while run:
-        SCREEN.fill(j["graphic"]["BACKGROUND"])
+        SCREEN.fill(j["graphic"]["BACKGROUND"][j["graphic"]["theme"]])
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:

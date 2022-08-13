@@ -28,7 +28,7 @@ class Solipsist:
         self.grav = grav
         self.SCREEN_HEIGHT = screen.get_height()
         if not color:
-            self.color = j["graphic"]["PLAYER_COLOR"]
+            self.color = j["graphic"]["PLAYER_COLOR"][j["graphic"]["theme"]]
 
     def get_rect(self):
         return self.player
@@ -58,7 +58,7 @@ class Obstacle:
         self.speed = speed
         self.SCREEN_HEIGHT = screen.get_height()
         if not color:
-            self.color = j["graphic"]["OBSTACLE_COLOR"]
+            self.color = j["graphic"]["OBSTACLE_COLOR"][j["graphic"]["theme"]]
 
     def get_rect(self):
         return self.obstacle
@@ -117,7 +117,7 @@ def main():
 
     run = True
     while run:
-        SCREEN.fill(j["graphic"]["BACKGROUND"])
+        SCREEN.fill(j["graphic"]["BACKGROUND"][j["graphic"]["theme"]])
         MUSIC.play_random_music()
 
         for event in pygame.event.get():
@@ -152,7 +152,9 @@ def main():
             pygame.display.flip()
             game_status.gameover = True
             game_status.is_game_started = False
-            from widget_loops.gameover import gameover  # Left it here, to avoid circular import
+            from widget_loops.gameover import (
+                gameover,
+            )  # Left it here, to avoid circular import
 
             gameover(game_status.time_played, game_status.clicks)
 

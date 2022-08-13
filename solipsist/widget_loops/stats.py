@@ -16,27 +16,27 @@ def stats():
     go_back_button = Button(
         "Go back",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.5),
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     best_record_button = Button(
         f"Best record: {datetime.timedelta(seconds=j['stats']['BEST_RECORD'])}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 3),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
 
     clicks_button = Button(
         f"Clicks: {j['stats']['CLICKS']}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
     time_button = Button(
         f"Time played: {datetime.timedelta(seconds=j['stats']['TIME_PLAYED'])}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2.4),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
     run = True
     while run:
-        SCREEN.fill(j["graphic"]["BACKGROUND"])
+        SCREEN.fill(j["graphic"]["BACKGROUND"][j["graphic"]["theme"]])
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:

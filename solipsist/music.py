@@ -17,9 +17,13 @@ class Music(GameStatus):
 
     @classmethod
     def make_description(cls):
-        music_text = Button(f"Currently playing: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
-        (int(WINDOW_WIDTH / 5), int(WINDOW_HEIGHT / 40)), (int(WINDOW_WIDTH / 60), int(WINDOW_WIDTH / 60)))
+        music_text = Button(
+            f"Currently playing: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
+            (int(WINDOW_WIDTH / 2.5), int(WINDOW_HEIGHT / 40)),
+            (int(WINDOW_WIDTH / 60), int(WINDOW_WIDTH / 60)),
+        )
         music_text.draw_it(SCREEN)
+
     @classmethod
     def pick_random_music(cls):
         all_music = []
@@ -48,54 +52,30 @@ class Music(GameStatus):
             GameStatus.is_music_playing = False
             GameStatus.current_music_name = ""
 
-    @staticmethod
     @debounce(0.1)
-    def sound_dead():
+    def play(sound_name):
         sound = pygame.mixer.Sound(
             resource_path(
                 os.path.join(
-                    resource_path(j["music"]["DEFAULT_SOUND_FOLDER"]), "dead.mp3"
+                    resource_path(j["music"]["DEFAULT_SOUND_FOLDER"]), sound_name
                 )
             )
         )
         sound.set_volume(j["music"]["EFFECT_VOLUME"])
         sound.play()
 
-    @staticmethod
-    @debounce(0.1)
-    def sound_menu_click():
-        sound = pygame.mixer.Sound(
-            resource_path(
-                os.path.join(
-                    resource_path(j["music"]["DEFAULT_SOUND_FOLDER"]), "menu_click.mp3"
-                )
-            )
-        )
-        sound.set_volume(j["music"]["EFFECT_VOLUME"])
-        sound.play()
+    @classmethod
+    def sound_dead(cls):
+        cls.play("dead.mp3")
 
-    @staticmethod
-    @debounce(0.1)
-    def sound_jump():
-        sound = pygame.mixer.Sound(
-            resource_path(
-                os.path.join(
-                    resource_path(j["music"]["DEFAULT_SOUND_FOLDER"]), "jump.mp3"
-                )
-            )
-        )
-        sound.set_volume(j["music"]["EFFECT_VOLUME"])
-        sound.play()
+    @classmethod
+    def sound_menu_click(cls):
+        cls.play("menu_click.mp3")
 
-    @staticmethod
-    @debounce(0.1)
-    def sound_new_record():
-        sound = pygame.mixer.Sound(
-            resource_path(
-                os.path.join(
-                    resource_path(j["music"]["DEFAULT_SOUND_FOLDER"]), "new_record.mp3"
-                )
-            )
-        )
-        sound.set_volume(j["music"]["EFFECT_VOLUME"])
-        sound.play()
+    @classmethod
+    def sound_jump(cls):
+        cls.play("jump.mp3")
+
+    @classmethod
+    def sound_new_record(cls):
+        cls.play("new_record.mp3")

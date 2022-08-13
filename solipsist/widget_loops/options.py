@@ -12,37 +12,42 @@ def options():
     go_back_button = Button(
         "Go back",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.5),
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
-    volume_button = Button(
+    change_theme_button = Button(
+        f"Theme: {j['graphic']['theme']}",
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 9),
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
+    )
+    music_volume_button = Button(
         f"Music volume: {j['music']['VOLUME']}",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 4),
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     effect_volume_button = Button(
         f"Effect volume: {j['music']['EFFECT_VOLUME']}",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 5.5),
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     fps_button = Button(
         "FPS:",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 3),
-        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
     )
     full_screen_button = Button(
         f"Full Screen: {j['graphic']['FULL_SCREEN']}",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2.5),
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     width_button = Button(
         "Width:",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2.1),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
     height_button = Button(
         "Height:",
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.8),
-        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15)
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
 
     fps_input_box = InputBox(
@@ -69,7 +74,7 @@ def options():
     run = True
     while run:
         events = pygame.event.get()
-        SCREEN.fill(j["graphic"]["BACKGROUND"])
+        SCREEN.fill(j["graphic"]["BACKGROUND"][j["graphic"]["theme"]])
         for event in events:
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -77,6 +82,15 @@ def options():
             fps_input_box.handle_event(event)
             window_width_box.handle_event(event)
             window_height_box.handle_event(event)
+
+        if change_theme_button.clicked(events):
+            if j["graphic"]["max_theme"] == j["graphic"]["theme"]:
+                j["graphic"]["theme"] = 0
+            else:
+                j["graphic"]["theme"] += 1
+
+            save_json()
+            options()
 
         if fps_input_box.active is True:
             try:
@@ -105,21 +119,25 @@ def options():
             except ValueError:
                 pass
 
-        if volume_button.clicked(events):
+        if music_volume_button.clicked(events):
             if j["music"]["VOLUME"] >= 1:
                 j["music"]["VOLUME"] = 0.0
             else:
                 j["music"]["VOLUME"] = round(j["music"]["VOLUME"] + 0.1, 1)
             save_json()
-            volume_button.change_text(f"Music volume: {j['music']['VOLUME']}")
+            music_volume_button.change_text(f"Music volume: {j['music']['VOLUME']}")
 
         if effect_volume_button.clicked(events):
             if j["music"]["EFFECT_VOLUME"] >= 1:
                 j["music"]["EFFECT_VOLUME"] = 0.0
             else:
-                j["music"]["EFFECT_VOLUME"] = round(j["music"]["EFFECT_VOLUME"] + 0.1, 1)
+                j["music"]["EFFECT_VOLUME"] = round(
+                    j["music"]["EFFECT_VOLUME"] + 0.1, 1
+                )
             save_json()
-            effect_volume_button.change_text(f"Effect volume: {j['music']['EFFECT_VOLUME']}")
+            effect_volume_button.change_text(
+                f"Effect volume: {j['music']['EFFECT_VOLUME']}"
+            )
 
         if full_screen_button.clicked(events):
             full_screen = not j["graphic"]["FULL_SCREEN"]
@@ -134,8 +152,9 @@ def options():
             main_menu()
 
         go_back_button.draw_it(SCREEN)
+        change_theme_button.draw_it(SCREEN)
         effect_volume_button.draw_it(SCREEN)
-        volume_button.draw_it(SCREEN)
+        music_volume_button.draw_it(SCREEN)
 
         fps_button.draw_it(SCREEN)
         fps_input_box.draw_it(SCREEN)

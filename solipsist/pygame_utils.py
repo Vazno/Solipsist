@@ -20,7 +20,7 @@ class Button:
         self.size = size
 
         self.button = pygame.Surface(size).convert()
-        self.button.fill(j["graphic"]["BACKGROUND"])
+        self.button.fill(j["graphic"]["BACKGROUND"][j["graphic"]["theme"]])
         self.outline = outline
 
         # Text is about 70% the height of the button
@@ -29,7 +29,9 @@ class Button:
         )
         self.font = font
         # First argument always requires a str, so f-string is used.
-        self.textSurf = font.render(f"{text}", True, j["graphic"]["FONT_COLOR"])
+        self.textSurf = font.render(
+            f"{text}", True, j["graphic"]["FONT_COLOR"][j["graphic"]["theme"]]
+        )
 
     def clicked(self, events) -> None:
         mousePos = pygame.mouse.get_pos()
@@ -78,13 +80,15 @@ class Button:
             )
 
     def change_text(self, text):
-        self.textSurf = self.font.render(f"{text}", True, j["graphic"]["FONT_COLOR"])
+        self.textSurf = self.font.render(
+            f"{text}", True, j["graphic"]["FONT_COLOR"][j["graphic"]["theme"]]
+        )
 
 
 class InputBox:
     def __init__(self, x, y, w, h, text=""):
         self.rect = pygame.Rect(x, y, w, h)
-        self.color = j["graphic"]["InputBox"]["COLOR_INACTIVE"]
+        self.color = j["graphic"]["InputBox"]["COLOR_INACTIVE"][j["graphic"]["theme"]]
         pygame.init()
         FONT = pygame.font.Font(
             resource_path(j["graphic"]["FONT"]), int(WINDOW_WIDTH / 40)
@@ -104,9 +108,9 @@ class InputBox:
                 self.active = False
             # Change the current color of the input box.
             self.color = (
-                j["graphic"]["InputBox"]["COLOR_ACTIVE"]
+                j["graphic"]["InputBox"]["COLOR_ACTIVE"][j["graphic"]["theme"]]
                 if self.active
-                else j["graphic"]["InputBox"]["COLOR_INACTIVE"]
+                else j["graphic"]["InputBox"]["COLOR_INACTIVE"][j["graphic"]["theme"]]
             )
         if event.type == pygame.KEYDOWN:
             if self.active:

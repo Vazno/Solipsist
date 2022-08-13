@@ -11,30 +11,16 @@
             0
         ],
         "FULL_SCREEN": true,
+        "max_theme": 2,
+        "theme": 0,
         "FONT": "fonts/712_serif.ttf",
-        "FONT_COLOR": [
-            255,
-            255,
-            255
-        ],
-        "PLAYER_COLOR": [
-            255,
-            255,
-            255
-        ],
-        "BACKGROUND": [
-            0,
-            0,
-            0
-        ],
-        "OBSTACLE_COLOR": [
-            255,
-            255,
-            255
-        ],
+        "FONT_COLOR": [[255,255,255], [0,0,0], [255,0,0]],
+        "PLAYER_COLOR": [[255,255,255],[0,0,0], [255,0,0]],
+        "BACKGROUND": [[0,0,0],[255,255,255],[50,0,0]],
+        "OBSTACLE_COLOR": [[255,255,255],[0,0,0],[150,0,0]],
         "InputBox": {
-            "COLOR_ACTIVE": [255, 255, 255],
-            "COLOR_INACTIVE": [150, 150, 150]
+            "COLOR_ACTIVE": [[255, 255, 255],[100,100,100],[255,0,0]],
+            "COLOR_INACTIVE": [[150, 150, 150], [50,50,50],[205,0,0]]
         }
     },
     "music": {
