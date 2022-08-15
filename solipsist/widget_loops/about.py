@@ -22,7 +22,7 @@ def about():
     description_button = Button(
         _["about.description"],
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
-        (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
+        (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 20),
     )
     run = True
     while run:
