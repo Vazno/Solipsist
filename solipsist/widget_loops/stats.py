@@ -10,27 +10,28 @@ from GSS import j
 from GSS import SCREEN
 from GSS import WINDOW_HEIGHT
 from GSS import WINDOW_WIDTH
+from GSS import get_language
 
 
 def stats():
+    _ = get_language()
     go_back_button = Button(
-        "Go back",
+        _["go_back"],
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.5),
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     best_record_button = Button(
-        f"Best record: {datetime.timedelta(seconds=j['stats']['BEST_RECORD'])}",
+        f"{_['stats.best_record']}: {datetime.timedelta(seconds=j['stats']['BEST_RECORD'])}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 3),
         (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
-
     clicks_button = Button(
-        f"Clicks: {j['stats']['CLICKS']}",
+        f"{_['clicks']}: {j['stats']['CLICKS']}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
         (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
     time_button = Button(
-        f"Time played: {datetime.timedelta(seconds=j['stats']['TIME_PLAYED'])}",
+        f"{_['time_played']}: {datetime.timedelta(seconds=j['stats']['TIME_PLAYED'])}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2.4),
         (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )

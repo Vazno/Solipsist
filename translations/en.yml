@@ -1,0 +1,27 @@
+main_menu.start: Start
+main_menu.options: Options
+main_menu.stats: Stats
+main_menu.about: About
+main_menu.quit: Quit
+
+options.theme: Theme
+options.music_volume: Music volume
+options.effect_volume: Effect volume
+options.fps: FPS
+options.full_screen: Full Screen
+options.width: Width
+options.height: Height
+options.language: Language
+
+stats.best_record: Best record
+
+about.description: Solipsist is a game made by Beksultan Artykbaev in the August of 2022.
+
+gameover.gameover: Gameover
+gameover.new_record: New record
+
+music.currently_playing: Currently playing
+
+go_back: Go back
+time_played: Time played
+clicks: Clicks

@@ -3,11 +3,13 @@ import sys
 import pygame
 import time
 
+
 from widget_loops.game import MUSIC
 from main import main_menu
 from pygame_utils import Button
 
 from GSS import save_json
+from GSS import get_language
 from GSS import j
 from GSS import SCREEN
 from GSS import WINDOW_HEIGHT
@@ -15,21 +17,22 @@ from GSS import WINDOW_WIDTH
 
 
 def gameover(time_played: int, clicks: int):
-    time_message = "Time played:"
+    _ = get_language()
+    time_message = f"{_['time_played']}:"
     if time_played > j["stats"]["BEST_RECORD"]:
         j["stats"]["BEST_RECORD"] = time_played
         save_json()
-        time_message = "New record!"
+        time_message = _["gameover.new_record"]
         MUSIC.sound_new_record()
 
     time.sleep(0.150)
     gameover_button = Button(
-        "Gameover",
+        _["gameover.gameover"],
         (WINDOW_WIDTH / 2.6, WINDOW_HEIGHT / 10),
         (WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5),
     )
     clicks_button = Button(
-        f"Clicks: {clicks}",
+        f"{_['clicks']}: {clicks}",
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
         (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )

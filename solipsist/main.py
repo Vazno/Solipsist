@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from GSS import GAME_NAME, SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
+from GSS import get_language
 from widget_loops.game import MUSIC, main
 from pygame_utils import Button
 
@@ -10,9 +11,9 @@ from pygame_utils import Button
 
 
 def main_menu():
+    _ = get_language()
     pygame.display.set_caption(GAME_NAME)
     pygame.init()
-
     clock = pygame.time.Clock()
 
     solipsist_button = Button(
@@ -21,27 +22,27 @@ def main_menu():
         (WINDOW_WIDTH / 5, WINDOW_HEIGHT / 5),
     )
     start_button = Button(
-        "Start",
+        _["main_menu.start"],
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 3),
         (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
     )
     options_button = Button(
-        "Options",
+        _["main_menu.options"],
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 2.4),
         (WINDOW_WIDTH / 8, WINDOW_HEIGHT / 15),
     )
     stats_button = Button(
-        "Stats",
+        _["main_menu.stats"],
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 2),
         (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
     )
     about_button = Button(
-        "About",
+        _["main_menu.about"],
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 1.70),
         (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
     )
     quit_button = Button(
-        "Quit",
+        _["main_menu.quit"],
         (WINDOW_WIDTH / 2.3, WINDOW_HEIGHT / 1.5),
         (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
     )

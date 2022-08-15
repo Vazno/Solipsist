@@ -2,6 +2,7 @@
 import os
 import pygame
 import json
+import yaml
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -39,6 +40,13 @@ except FileNotFoundError:
         os.path.join(os.path.join(user_data_dir(), GAME_NAME), "settings.json")
     ) as f:
         j = json.load(f)
+
+
+def get_language():
+    with open(f"translations\\{j['languages'][j['language']]}.yml", "r") as f:
+        _ = yaml.safe_load(f)
+        return _
+
 
 if j["graphic"]["FULL_SCREEN"]:
     try:

@@ -3,74 +3,83 @@ import pygame
 
 from GSS import SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, save_json
 from GSS import j
+from GSS import get_language
 from main import main_menu
 from widget_loops.game import MUSIC
 from pygame_utils import Button, InputBox
 
 
 def options():
+    _ = get_language()
     go_back_button = Button(
-        "Go back",
+        _["go_back"],
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.5),
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     change_theme_button = Button(
-        f"Theme: {j['graphic']['theme']}",
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 9),
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
+        f"{_['options.theme']}: {j['graphic']['theme']}",
+        (WINDOW_WIDTH / 13, WINDOW_HEIGHT / 9),
+        (WINDOW_WIDTH / 5, WINDOW_HEIGHT / 15),
     )
     music_volume_button = Button(
-        f"Music volume: {j['music']['VOLUME']}",
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 4),
+        f"{_['options.music_volume']}: {j['music']['VOLUME']}",
+        (WINDOW_WIDTH / 13, WINDOW_HEIGHT / 4),
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     effect_volume_button = Button(
-        f"Effect volume: {j['music']['EFFECT_VOLUME']}",
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 5.5),
+        f"{_['options.effect_volume']}: {j['music']['EFFECT_VOLUME']}",
+        (WINDOW_WIDTH / 13, WINDOW_HEIGHT / 5.5),
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     fps_button = Button(
-        "FPS:",
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 3),
+        _["options.fps"],
+        (WINDOW_WIDTH / 13, WINDOW_HEIGHT / 3),
         (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
     )
     full_screen_button = Button(
-        f"Full Screen: {j['graphic']['FULL_SCREEN']}",
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2.5),
+        f"{_['options.full_screen']}: {j['graphic']['FULL_SCREEN']}",
+        (WINDOW_WIDTH / 13, WINDOW_HEIGHT / 2.5),
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     width_button = Button(
-        "Width:",
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2.1),
+        f"{_['options.width']}:",
+        (WINDOW_WIDTH / 13, WINDOW_HEIGHT / 2.1),
         (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
     height_button = Button(
-        "Height:",
-        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.8),
+        f"{_['options.height']}:",
+        (WINDOW_WIDTH / 13, WINDOW_HEIGHT / 1.8),
         (WINDOW_WIDTH / 15, WINDOW_HEIGHT / 15),
     )
 
     fps_input_box = InputBox(
-        WINDOW_WIDTH / 2.1,
+        WINDOW_WIDTH / 6.1,
         WINDOW_HEIGHT / 2.92,
         WINDOW_WIDTH / 25,
         WINDOW_HEIGHT / 25,
         str(j["game_settings"]["FPS"]),
     )
     window_width_box = InputBox(
-        WINDOW_WIDTH / 2.1,
+        WINDOW_WIDTH / 6.1,
         WINDOW_HEIGHT / 2.02,
         WINDOW_WIDTH / 25,
         WINDOW_HEIGHT / 25,
         str(j["graphic"]["resolution"][0]),
     )
     window_height_box = InputBox(
-        WINDOW_WIDTH / 2.1,
+        WINDOW_WIDTH / 6.1,
         WINDOW_HEIGHT / 1.72,
         WINDOW_WIDTH / 25,
         WINDOW_HEIGHT / 25,
         str(j["graphic"]["resolution"][1]),
     )
+
+    change_language = Button(
+        f"{_['options.language']}: {j['languages'][j['language']]}",
+        (WINDOW_WIDTH / 1.7, WINDOW_HEIGHT / 9),
+        (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
+    )
+
     run = True
     while run:
         events = pygame.event.get()
@@ -84,7 +93,7 @@ def options():
             window_height_box.handle_event(event)
 
         if change_theme_button.clicked(events):
-            if j["graphic"]["max_theme"] == j["graphic"]["theme"]:
+            if len(j["graphic"]["FONT_COLOR"]) - 1 == j["graphic"]["theme"]:
                 j["graphic"]["theme"] = 0
             else:
                 j["graphic"]["theme"] += 1
@@ -151,6 +160,15 @@ def options():
             MUSIC.sound_menu_click()
             main_menu()
 
+        if change_language.clicked(events):
+            l = len(j["languages"]) - 1
+            if l == j["language"]:
+                j["language"] = 0
+            else:
+                j["language"] += 1
+            save_json()
+            options()
+
         go_back_button.draw_it(SCREEN)
         change_theme_button.draw_it(SCREEN)
         effect_volume_button.draw_it(SCREEN)
@@ -170,4 +188,5 @@ def options():
         window_width_box.draw_it(SCREEN)
         window_width_box.update()
 
+        change_language.draw_it(SCREEN)
         pygame.display.flip()

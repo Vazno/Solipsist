@@ -9,6 +9,7 @@ from GSS import j
 from GSS import SCREEN
 from GSS import WINDOW_HEIGHT
 from GSS import WINDOW_WIDTH
+from GSS import get_language
 
 
 class Music(GameStatus):
@@ -17,8 +18,9 @@ class Music(GameStatus):
 
     @classmethod
     def make_description(cls):
+        _ = get_language()
         music_text = Button(
-            f"Currently playing: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
+            f"{_['music.currently_playing']}: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
             (int(WINDOW_WIDTH / 2.5), int(WINDOW_HEIGHT / 40)),
             (int(WINDOW_WIDTH / 60), int(WINDOW_WIDTH / 60)),
         )

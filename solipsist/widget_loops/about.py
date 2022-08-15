@@ -9,16 +9,18 @@ from GSS import j
 from GSS import SCREEN
 from GSS import WINDOW_HEIGHT
 from GSS import WINDOW_WIDTH
+from GSS import get_language
 
 
 def about():
+    _ = get_language()
     go_back_button = Button(
-        "Go back",
+        _["go_back"],
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 1.5),
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
     description_button = Button(
-        j["DESCRIPTION"],
+        _["about.description"],
         (WINDOW_WIDTH / 2.2, WINDOW_HEIGHT / 2),
         (WINDOW_WIDTH / 10, WINDOW_HEIGHT / 15),
     )

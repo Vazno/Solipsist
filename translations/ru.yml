@@ -1,0 +1,27 @@
+main_menu.start: Старт
+main_menu.options: Настройки
+main_menu.stats: Статистика
+main_menu.about: Инфо
+main_menu.quit: Выйти
+
+options.theme: Тема
+options.music_volume: Громкость музыки
+options.effect_volume: Громкость звуков
+options.fps: FPS
+options.full_screen: Полный экран
+options.width: Ширина
+options.height: Высота
+options.language: Язык
+
+stats.best_record: Лучший рекорд
+
+about.description: Solipsist это игра созданная Бексултаном Артыкбаевым в Августе 2022 года.
+
+gameover.gameover: Проигрыш
+gameover.new_record: Новый рекорд
+
+music.currently_playing: Сейчас играет
+
+go_back: Назад
+time_played: Времени сыграно
+clicks: Кликов
