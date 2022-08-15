@@ -8,6 +8,7 @@ This is a game where you need to control solipsist (Cube) that moves past obstac
 ## Installation
 
 Install Python3
+Install pip
 ###### run ``pip install -r requirements.txt`` in root directory
 ##### run ``python main.py`` in solipsist/ directory 
 
