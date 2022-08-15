@@ -1,4 +1,5 @@
 import json
+import os
 
 
 def test_stats():
@@ -33,3 +34,11 @@ def test_music():
     assert test_j["music"]["VOLUME"] <= 1
     assert test_j["music"]["EFFECT_VOLUME"] <= 1
 
+
+def test_languages():
+    from solipsist.utils import resource_path
+
+    with open(resource_path("settings.json")) as f:
+        test_j = json.load(f)
+    all_languages = os.listdir("translations/")
+    assert test_j["language"] <= len(all_languages)-1
