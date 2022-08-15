@@ -1,0 +1,27 @@
+main_menu.start: Εκκίνηση
+main_menu.options: Επιλογές
+main_menu.stats: Στατιστικά
+main_menu.about: Σχετικά με
+main_menu.quit: Τερματισμός
+
+options.theme: Θέμα
+options.music_volume: Ένταση μουσικής
+options.effect_volume: Ένταση ηχητικών εφέ
+options.fps: FPS
+options.full_screen: Πλήρης Οθόνη
+options.width: Πλάτος
+options.height: Ύψος
+options.language: Γλώσσα
+
+stats.best_record: Υψηλότερο ρεκόρ
+
+about.description: Το Solipsist είναι ένα παιχνίδι που αναπτύχθηκε από τον Beksultan Artykbaev τον Αύγουστο του 2022.
+
+gameover.gameover: Τέλος Παιχνιδιού
+gameover.new_record: Νέο ρεκόρ
+
+music.currently_playing: Τώρα παίζει
+
+go_back: Πίσω
+time_played: Χρόνος παιχνιδιού
+clicks: Κλικς
