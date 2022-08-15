@@ -17,8 +17,7 @@ def test_themes():
 
     with open(resource_path("settings.json")) as f:
         test_j = json.load(f)
-    max_theme_num = test_j["graphic"]["max_theme"] + 1  # Non programmic indexing
-    assert len(test_j["graphic"]["FONT_COLOR"]) == max_theme_num
+    max_theme_num = len(test_j["graphic"]["FONT_COLOR"])
     assert len(test_j["graphic"]["PLAYER_COLOR"]) == max_theme_num
     assert len(test_j["graphic"]["BACKGROUND"]) == max_theme_num
     assert len(test_j["graphic"]["OBSTACLE_COLOR"]) == max_theme_num
@@ -33,3 +32,9 @@ def test_music():
         test_j = json.load(f)
     assert test_j["music"]["VOLUME"] <= 1
     assert test_j["music"]["EFFECT_VOLUME"] <= 1
+
+def test_language():
+    from solipsist.utils import resource_path
+    with open(resource_path("settings.json")) as f:
+        test_j = json.load(f)
+    assert test_j["language"] <= len(test_j["languages"])-1
