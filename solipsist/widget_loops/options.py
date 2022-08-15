@@ -1,3 +1,4 @@
+import os
 import sys
 import pygame
 
@@ -8,7 +9,7 @@ from main import main_menu
 from widget_loops.game import MUSIC
 from pygame_utils import Button, InputBox
 
-
+languages = os.listdir("translations/")
 def options():
     _ = get_language()
     go_back_button = Button(
@@ -75,7 +76,7 @@ def options():
     )
 
     change_language = Button(
-        f"{_['options.language']}: {j['languages'][j['language']]}",
+        f"{_['options.language']}: {languages[j['language']].split('.')[0]}",
         (WINDOW_WIDTH / 1.7, WINDOW_HEIGHT / 9),
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )
@@ -161,7 +162,7 @@ def options():
             main_menu()
 
         if change_language.clicked(events):
-            l = len(j["languages"]) - 1
+            l = len(os.listdir("translations/"))-1
             if l == j["language"]:
                 j["language"] = 0
             else:

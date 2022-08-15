@@ -32,6 +32,5 @@
         "TIME_PLAYED": 0,
         "BEST_RECORD": 0
     },
-    "language": 0,
-    "languages": ["en", "ru"]
+    "language": 0
 }
