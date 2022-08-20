@@ -10,6 +10,7 @@ from GSS import SCREEN
 from GSS import WINDOW_HEIGHT
 from GSS import WINDOW_WIDTH
 
+
 class ScreenObject(ABC):
     def __init__(self) -> None:
         super().__init__()
@@ -17,6 +18,7 @@ class ScreenObject(ABC):
     @abstractmethod
     def draw_it():
         pass
+
 
 # Takes rectangle's size, position and a point. Returns true if that
 # point is inside the rectangle and false if it isnt.
@@ -152,6 +154,7 @@ class InputBox(ScreenObject):
         # Blit the rect.
         pygame.draw.rect(screen, self.color, self.rect, 2)
 
+
 class Solipsist(ScreenObject):
     """The main character's class."""
 
@@ -179,6 +182,7 @@ class Solipsist(ScreenObject):
 
     def jump(self):
         self.functional_grav = -self.grav * 24
+
 
 class Obstacle(ScreenObject):
     """Class for obstacles."""

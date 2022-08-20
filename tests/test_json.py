@@ -41,4 +41,4 @@ def test_languages():
     with open(resource_path("settings.json")) as f:
         test_j = json.load(f)
     all_languages = os.listdir("translations/")
-    assert test_j["language"] <= len(all_languages)-1
+    assert test_j["language"] <= len(all_languages) - 1

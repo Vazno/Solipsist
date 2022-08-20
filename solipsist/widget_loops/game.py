@@ -15,6 +15,7 @@ from music import Music
 
 MUSIC = Music()
 
+
 def main():
     pygame.display.set_caption(GAME_NAME)
 
