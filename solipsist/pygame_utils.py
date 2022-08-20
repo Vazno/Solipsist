@@ -1,7 +1,22 @@
 import pygame
+import random
+from abc import ABC, abstractmethod
 from typing import Tuple
-from GSS import WINDOW_WIDTH, j
+
 from utils import resource_path
+from GSS import j
+from GSS import OBSTACLE_DEFAULT_VEL
+from GSS import SCREEN
+from GSS import WINDOW_HEIGHT
+from GSS import WINDOW_WIDTH
+
+class ScreenObject(ABC):
+    def __init__(self) -> None:
+        super().__init__()
+
+    @abstractmethod
+    def draw_it():
+        pass
 
 # Takes rectangle's size, position and a point. Returns true if that
 # point is inside the rectangle and false if it isnt.
@@ -12,7 +27,7 @@ def pointInRectangle(px, py, rw, rh, rx, ry):
     return False
 
 
-class Button:
+class Button(ScreenObject):
     def __init__(
         self, text: str, position: Tuple, size: Tuple = (200, 50), outline: bool = False
     ) -> None:
@@ -32,6 +47,7 @@ class Button:
         self.textSurf = font.render(
             f"{text}", True, j["graphic"]["FONT_COLOR"][j["graphic"]["theme"]]
         )
+        super().__init__()
 
     def clicked(self, events) -> None:
         mousePos = pygame.mouse.get_pos()
@@ -85,7 +101,7 @@ class Button:
         )
 
 
-class InputBox:
+class InputBox(ScreenObject):
     def __init__(self, x, y, w, h, text=""):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = j["graphic"]["InputBox"]["COLOR_INACTIVE"][j["graphic"]["theme"]]
@@ -97,6 +113,7 @@ class InputBox:
         self.text = text
         self.txt_surface = self.FONT.render(text, True, self.color)
         self.active = False
+        super().__init__()
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -134,3 +151,71 @@ class InputBox:
         screen.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
         # Blit the rect.
         pygame.draw.rect(screen, self.color, self.rect, 2)
+
+class Solipsist(ScreenObject):
+    """The main character's class."""
+
+    def __init__(self, screen, left, top, size: int, grav: int, color=None) -> None:
+        player = pygame.Rect(left, top, size, size)
+        self.functional_grav = 0
+        self.screen = screen
+        self.size = size
+        self.player = player
+        self.grav = grav
+        self.SCREEN_HEIGHT = screen.get_height()
+        if not color:
+            self.color = j["graphic"]["PLAYER_COLOR"][j["graphic"]["theme"]]
+        super().__init__()
+
+    def get_rect(self):
+        return self.player
+
+    def draw_it(self):
+        pygame.draw.rect(self.screen, self.color, self.player)
+
+    def fall(self):
+        self.player.y += self.functional_grav
+        self.functional_grav += self.grav
+
+    def jump(self):
+        self.functional_grav = -self.grav * 24
+
+class Obstacle(ScreenObject):
+    """Class for obstacles."""
+
+    def __init__(
+        self, screen, left, top, width, height, speed: int, color=None
+    ) -> None:
+        obstacle = pygame.Rect(left, top, width, height)
+        self.functional_grav = 0
+        self.screen = screen
+        self.obstacle = obstacle
+        self.speed = speed
+        self.SCREEN_HEIGHT = screen.get_height()
+        if not color:
+            self.color = j["graphic"]["OBSTACLE_COLOR"][j["graphic"]["theme"]]
+        super().__init__()
+
+    def get_rect(self):
+        return self.obstacle
+
+    def draw_it(self):
+        pygame.draw.rect(self.screen, self.color, self.obstacle)
+
+    def move(self, num: int = None):
+        if num is None:
+            num = OBSTACLE_DEFAULT_VEL
+        self.obstacle.x += num
+
+    @staticmethod
+    def generate_random_obstacle():
+        """Generates obstacles going from the right of the screen"""
+        obstacle_class = Obstacle(
+            SCREEN,
+            random.randint(WINDOW_WIDTH, int(WINDOW_WIDTH + WINDOW_WIDTH / 10)),
+            WINDOW_HEIGHT / random.randint(2, 10),
+            WINDOW_WIDTH / random.randint(30, 40),
+            WINDOW_HEIGHT / random.randint(2, 10),
+            OBSTACLE_DEFAULT_VEL,
+        )
+        return obstacle_class

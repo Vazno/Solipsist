@@ -1,5 +1,5 @@
 import pygame
-import random
+
 import sys
 from time import time
 
@@ -9,81 +9,11 @@ from GSS import j
 from GSS import SCREEN
 from GSS import WINDOW_HEIGHT
 from GSS import WINDOW_WIDTH
-from GSS import OBSTACLE_DEFAULT_VEL
+from pygame_utils import Solipsist, Obstacle
 
 from music import Music
 
 MUSIC = Music()
-
-
-class Solipsist:
-    """The main character's class."""
-
-    def __init__(self, screen, left, top, size: int, grav: int, color=None) -> None:
-        player = pygame.Rect(left, top, size, size)
-        self.functional_grav = 0
-        self.screen = screen
-        self.size = size
-        self.player = player
-        self.grav = grav
-        self.SCREEN_HEIGHT = screen.get_height()
-        if not color:
-            self.color = j["graphic"]["PLAYER_COLOR"][j["graphic"]["theme"]]
-
-    def get_rect(self):
-        return self.player
-
-    def draw_it(self):
-        pygame.draw.rect(self.screen, self.color, self.player)
-
-    def fall(self):
-        self.player.y += self.functional_grav
-        self.functional_grav += self.grav
-
-    def jump(self):
-
-        self.functional_grav = -self.grav * 24
-
-
-class Obstacle:
-    """Class for obstacles."""
-
-    def __init__(
-        self, screen, left, top, width, height, speed: int, color=None
-    ) -> None:
-        obstacle = pygame.Rect(left, top, width, height)
-        self.functional_grav = 0
-        self.screen = screen
-        self.obstacle = obstacle
-        self.speed = speed
-        self.SCREEN_HEIGHT = screen.get_height()
-        if not color:
-            self.color = j["graphic"]["OBSTACLE_COLOR"][j["graphic"]["theme"]]
-
-    def get_rect(self):
-        return self.obstacle
-
-    def draw_it(self):
-        pygame.draw.rect(self.screen, self.color, self.obstacle)
-
-    def move(self, num: int = None):
-        if num is None:
-            num = OBSTACLE_DEFAULT_VEL
-        self.obstacle.x += num
-
-    @staticmethod
-    def generate_random_obstacle():
-        """Generates obstacles going from the right of the screen"""
-        obstacle_class = Obstacle(
-            SCREEN,
-            random.randint(WINDOW_WIDTH, int(WINDOW_WIDTH + WINDOW_WIDTH / 10)),
-            WINDOW_HEIGHT / random.randint(2, 10),
-            WINDOW_WIDTH / random.randint(30, 40),
-            WINDOW_HEIGHT / random.randint(2, 10),
-            OBSTACLE_DEFAULT_VEL,
-        )
-        return obstacle_class
-
 
 def main():
     pygame.display.set_caption(GAME_NAME)
