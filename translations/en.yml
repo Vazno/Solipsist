@@ -11,7 +11,6 @@ options.fps: FPS
 options.full_screen: Full Screen
 options.width: Width
 options.height: Height
-options.language: Language
 
 stats.best_record: Best record
 

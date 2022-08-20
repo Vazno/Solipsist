@@ -11,7 +11,6 @@ options.fps: IPS
 options.full_screen: Plein écran
 options.width: Largeur
 options.height: Hauteur
-options.language: Langage
 
 stats.best_record: Meilleur record
 

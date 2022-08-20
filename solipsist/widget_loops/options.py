@@ -78,7 +78,7 @@ def options():
     )
 
     change_language = Button(
-        f"{_['options.language']}: {languages[j['language']].split('.')[0]}",
+        f"Language: {languages[j['language']].split('.')[0]}",
         (WINDOW_WIDTH / 1.7, WINDOW_HEIGHT / 9),
         (WINDOW_WIDTH / 3, WINDOW_HEIGHT / 15),
     )

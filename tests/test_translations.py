@@ -1,4 +1,5 @@
 def test_translations():
+    '''Checks if all translations have the same length as the main english translations.'''
     import yaml
     import os
     from solipsist.utils import resource_path

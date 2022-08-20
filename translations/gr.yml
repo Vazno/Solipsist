@@ -11,7 +11,6 @@ options.fps: FPS
 options.full_screen: Πλήρης Οθόνη
 options.width: Πλάτος
 options.height: Ύψος
-options.language: Γλώσσα
 
 stats.best_record: Υψηλότερο ρεκόρ
 
