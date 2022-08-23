@@ -43,8 +43,8 @@ except FileNotFoundError:
 
 
 def get_language():
-    languages = os.listdir("translations/")
-    with open(f"translations\\{languages[j['language']]}", "r") as f:
+    languages = os.listdir(resource_path("translations/"))
+    with open(f"{resource_path('translations')}\\{languages[j['language']]}", "r") as f:
         _ = yaml.safe_load(f)
         return _
 
