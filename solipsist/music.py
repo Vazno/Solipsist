@@ -22,7 +22,7 @@ class Music(GameStatus):
         music_text = Button(
             f"{_['music.currently_playing']}: {cls.current_music_name.split('.')[0].replace(resource_path(j['music']['DEFAULT_MUSIC_FOLDER']), '')}",
             (int(WINDOW_WIDTH / 2.5), int(WINDOW_HEIGHT / 40)),
-            (int(WINDOW_WIDTH / 60), int(WINDOW_WIDTH / 60)),
+            (int(WINDOW_WIDTH / 40), int(WINDOW_WIDTH / 40)),
         )
         music_text.draw_it(SCREEN)
 

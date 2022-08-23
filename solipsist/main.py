@@ -12,8 +12,11 @@ from pygame_utils import Button
 
 def main_menu():
     _ = get_language()
+
     pygame.display.set_caption(GAME_NAME)
     pygame.init()
+    game_icon = pygame.image.load("icon.png")
+    pygame.display.set_icon(game_icon)
     clock = pygame.time.Clock()
 
     solipsist_button = Button(
