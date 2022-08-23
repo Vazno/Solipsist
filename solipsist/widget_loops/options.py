@@ -6,10 +6,11 @@ from GSS import SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, save_json
 from GSS import j
 from GSS import get_language
 from main import main_menu
+from utils import resource_path
 from widget_loops.game import MUSIC
 from pygame_utils import Button, InputBox
 
-languages = os.listdir("translations/")
+languages = os.listdir(resource_path("translations/"))
 
 
 def options():
@@ -164,7 +165,7 @@ def options():
             main_menu()
 
         if change_language.clicked(events):
-            l = len(os.listdir("translations/")) - 1
+            l = len(os.listdir(resource_path("translations/"))) - 1
             if l == j["language"]:
                 j["language"] = 0
             else:
