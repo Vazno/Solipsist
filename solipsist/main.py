@@ -6,6 +6,7 @@ from GSS import GAME_NAME, SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
 from GSS import get_language
 from widget_loops.game import MUSIC, main
 from pygame_utils import Button
+from utils import resource_path
 
 # Some imports are below, to prevent circular import
 
@@ -15,7 +16,8 @@ def main_menu():
 
     pygame.display.set_caption(GAME_NAME)
     pygame.init()
-    game_icon = pygame.image.load("icon.png")
+
+    game_icon = pygame.image.load(resource_path("icon.png"))
     pygame.display.set_icon(game_icon)
     clock = pygame.time.Clock()
 
