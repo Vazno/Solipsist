@@ -2,11 +2,11 @@ import sys
 
 import pygame
 
-from GSS import GAME_NAME, SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
-from GSS import get_language
-from widget_loops.game import MUSIC, main
-from pygame_utils import Button
-from utils import resource_path
+from solipsist.GSS import GAME_NAME, SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, j
+from solipsist.GSS import get_language
+from solipsist.widget_loops.game import MUSIC, main
+from solipsist.pygame_utils import Button
+from solipsist.utils import resource_path
 
 # Some imports are below, to prevent circular import
 
@@ -68,19 +68,19 @@ def main_menu():
 
         if options_button.clicked(events):
             MUSIC.sound_menu_click()
-            from widget_loops.options import options
+            from solipsist.widget_loops.options import options
 
             options()
 
         if stats_button.clicked(events):
             MUSIC.sound_menu_click()
-            from widget_loops.stats import stats
+            from solipsist.widget_loops.stats import stats
 
             stats()
 
         if about_button.clicked(events):
             MUSIC.sound_menu_click()
-            from widget_loops.about import about
+            from solipsist.widget_loops.about import about
 
             about()
 

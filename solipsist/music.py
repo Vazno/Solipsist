@@ -2,14 +2,14 @@ import pygame
 import os
 from random import choice
 
-from utils import debounce, resource_path
-from pygame_utils import Button
-from GSS import GameStatus
-from GSS import j
-from GSS import SCREEN
-from GSS import WINDOW_HEIGHT
-from GSS import WINDOW_WIDTH
-from GSS import get_language
+from solipsist.utils import debounce, resource_path
+from solipsist.pygame_utils import Button
+from solipsist.GSS import GameStatus
+from solipsist.GSS import j
+from solipsist.GSS import SCREEN
+from solipsist.GSS import WINDOW_HEIGHT
+from solipsist.GSS import WINDOW_WIDTH
+from solipsist.GSS import get_language
 
 
 class Music(GameStatus):

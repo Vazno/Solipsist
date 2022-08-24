@@ -3,17 +3,16 @@ import sys
 import pygame
 import time
 
-
-from widget_loops.game import MUSIC
 from main import main_menu
-from pygame_utils import Button
+from solipsist.widget_loops.game import MUSIC
+from solipsist.pygame_utils import Button
 
-from GSS import save_json
-from GSS import get_language
-from GSS import j
-from GSS import SCREEN
-from GSS import WINDOW_HEIGHT
-from GSS import WINDOW_WIDTH
+from solipsist.GSS import save_json
+from solipsist.GSS import get_language
+from solipsist.GSS import j
+from solipsist.GSS import SCREEN
+from solipsist.GSS import WINDOW_HEIGHT
+from solipsist.GSS import WINDOW_WIDTH
 
 
 def gameover(time_played: int, clicks: int):

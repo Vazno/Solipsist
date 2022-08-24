@@ -3,12 +3,12 @@ import random
 from abc import ABC, abstractmethod
 from typing import Tuple
 
-from utils import resource_path
-from GSS import j
-from GSS import OBSTACLE_DEFAULT_VEL
-from GSS import SCREEN
-from GSS import WINDOW_HEIGHT
-from GSS import WINDOW_WIDTH
+from solipsist.utils import resource_path
+from solipsist.GSS import j
+from solipsist.GSS import OBSTACLE_DEFAULT_VEL
+from solipsist.GSS import SCREEN
+from solipsist.GSS import WINDOW_HEIGHT
+from solipsist.GSS import WINDOW_WIDTH
 
 
 class ScreenObject(ABC):

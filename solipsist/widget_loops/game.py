@@ -3,15 +3,15 @@ import pygame
 import sys
 from time import time
 
-from GSS import GAME_NAME, GameStatus
-from GSS import save_json
-from GSS import j
-from GSS import SCREEN
-from GSS import WINDOW_HEIGHT
-from GSS import WINDOW_WIDTH
-from pygame_utils import Solipsist, Obstacle
+from solipsist.GSS import GAME_NAME, GameStatus
+from solipsist.GSS import save_json
+from solipsist.GSS import j
+from solipsist.GSS import SCREEN
+from solipsist.GSS import WINDOW_HEIGHT
+from solipsist.GSS import WINDOW_WIDTH
+from solipsist.pygame_utils import Solipsist, Obstacle
 
-from music import Music
+from solipsist.music import Music
 
 MUSIC = Music()
 
@@ -83,7 +83,7 @@ def main():
             pygame.display.flip()
             game_status.gameover = True
             game_status.is_game_started = False
-            from widget_loops.gameover import (
+            from solipsist.widget_loops.gameover import (
                 gameover,
             )  # Left it here, to avoid circular import
 

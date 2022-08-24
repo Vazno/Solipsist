@@ -2,13 +2,13 @@ import os
 import sys
 import pygame
 
-from GSS import SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, save_json
-from GSS import j
-from GSS import get_language
 from main import main_menu
-from utils import resource_path
-from widget_loops.game import MUSIC
-from pygame_utils import Button, InputBox
+from solipsist.GSS import SCREEN, WINDOW_HEIGHT, WINDOW_WIDTH, save_json
+from solipsist.GSS import j
+from solipsist.GSS import get_language
+from solipsist.utils import resource_path
+from solipsist.widget_loops.game import MUSIC
+from solipsist.pygame_utils import Button, InputBox
 
 languages = os.listdir(resource_path("translations/"))
 
